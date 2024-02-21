@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.serenitybdd.cucumber</groupId>
+    <artifactId>AutomationExercise</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Serenity BDD project using Cucumber</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- VERSIONS -->
+        <selenium.version>4.18.1</selenium.version>
+        <serenity.version>4.1.0</serenity.version>
+        <junit-vintage-engine.version>5.10.2</junit-vintage-engine.version>
+        <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
+        <cucumber-junit-platform-engine.version>7.15.0</cucumber-junit-platform-engine.version>
+        <logback.version>1.5.0</logback.version>
+        <assertj.version>3.25.3</assertj.version>
+        <maven-mojo.version>3.2.5</maven-mojo.version>
+        <maven-compiler.version>3.12.1</maven-compiler.version>
+        <source-target.version>21</source-target.version>
+    </properties>
+
+    <dependencies>
+        <!-- SELENIUM -->
+        <dependency> <!-- Selenium WebDriver API for automating web browsers -->
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <!-- JUNIT 5 -->
+        <dependency> <!-- launching JUnit platform tests -->
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit-platform-suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- write and execute tests using JUnit 5 -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-vintage-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SERENITY + CUCUMBER -->
+        <dependency> <!-- executing automated tests, generating reports, facilitating BDD-style -->
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- use Serenity BDD features with Cucumber for BDD-style scenarios -->
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- CUCUMBER + JUNIT -->
+        <dependency> <!-- run Cucumber tests using the JUnit Platform test runner -->
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber-junit-platform-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- compatibility for running test suites in JUnit 3 & 4 -->
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-vintage-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- running test suites in JUnit 5 -->
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit-platform-suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- SCREENPLAY -->
+        <dependency> <!--  introduces Screenplay pattern, more expressive and maintainable automated tests -->
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-screenplay</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- Screenplay-style interactions with web elements using WebDriver -->
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-screenplay-webdriver</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency> <!-- additional assertion capabilities for enhancing the readability -->
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-ensure</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- LOGBACK -->
+        <dependency> <!-- logging capabilities -->
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- ASSERTJ -->
+        <dependency> <!-- set of assertion methods for various data types and objects -->
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin> <!-- running unit tests in Maven project -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-mojo.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin> <!-- running integration tests in Maven project -->
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-mojo.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/Test*.java</include>
+                        <include>**/*TestSuite.java</include>
+                        <include>**/When*.java</include>
+                    </includes>
+                    <parallel>classes</parallel>
+                    <parallel>methods</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin> <!-- compile Java source code in Maven project -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>${source-target.version}</source>
+                    <target>${source-target.version}</target>
+                </configuration>
+            </plugin>
+            <plugin> <!-- integrates Serenity BDD reporting capabilities into Maven project -->
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version>
+                <configuration>
+                    <reports>single-page-html</reports>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-single-page-report</artifactId>
+                        <version>${serenity.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
