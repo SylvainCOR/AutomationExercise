@@ -1,14 +1,12 @@
-package starter.stepdefinitions;
+package AutomationExerciseTesting.StepDefinitions;
 
+import AutomationExerciseTesting.ActionTasks.CompareTextOf;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.questions.Text;
-import starter.clickElements.LeftClickOn;
-import starter.navigation.NavigateTo;
-import starter.textElements.LoginPage;
+import AutomationExerciseTesting.ActionTasks.LeftClickOn;
+import AutomationExerciseTesting.ActionTasks.NavigateTo;
 
 public class RegistrationStepDefinitions {
 
@@ -18,16 +16,19 @@ public class RegistrationStepDefinitions {
                 NavigateTo.theAutomationExerciseHomePage());
     }
     @When("{actor} clicks on Signup Login button")
-    public void clickOnButton(Actor actor) {
+    public void clickOnSignUpLoginLink(Actor actor) {
         actor.attemptsTo(
-                LeftClickOn.theSignUpLoginButton()
+                LeftClickOn.theSignUpLoginLink()
         );
     }
     @Then("{actor} can see {string} on login page")
-    public void heCanSeeOnLoginPage(Actor actor, String expectedTitle) {
+    public void checkSignUpFormTitle(Actor actor, String expectedTitle) {
         actor.attemptsTo(
-                Ensure.that(Text.of(LoginPage.SIGN_UP_FORM_TITLE).answeredBy(actor))
-                        .isEqualToIgnoringCase(expectedTitle)
+                CompareTextOf.theSignupFormTitleWith(expectedTitle)
         );
+    }
+    @When("{actor} enters name {string} and email {string}")
+    public void enterNameAndEmail(Actor actor, String arg0, String arg1) {
+
     }
 }
