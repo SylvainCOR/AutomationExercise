@@ -16,7 +16,7 @@ public class FillTheFormWith {
                 Enter.theValue(email).into(LoginPage.SIGN_UP_EMAIL_FIELD)
         );
     }
-    public static Performable AccountInformationDetails(String title, String name, String email, String password, String dateOfBirth) throws ParseException {
+    public static Performable AccountInformationDetails(String title, String name, String email, String password, String dateOfBirth) {
         return Task.where("{0} fills account information details",
                 ClickOnThe.TitleGender(title),
                 CompareTextOfThe.NameProvided(name),

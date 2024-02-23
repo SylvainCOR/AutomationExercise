@@ -19,9 +19,13 @@ public class ClickOnThe {
         );
     }
     public static Performable TitleGender(String title) {
-        return Task.where("{0} clicks on the title gender",
-                Click.on(title.equals("Mr") ? SignupPage.TITLE_GENDER_M :
-                        SignupPage.TITLE_GENDER_F)
+        return Task.where("{0} clicks on the title gender '" + title + "'",
+                Click.on(SignupPage.TITLE_GENDER_F)
+        );
+    }
+    public static Performable SelectedCheckbox(String checkBox) {
+        return Task.where("{0} select the '" + checkBox + "'checkbox",
+                Click.on(SignupPage.targetelementname(checkBox))
         );
     }
 }

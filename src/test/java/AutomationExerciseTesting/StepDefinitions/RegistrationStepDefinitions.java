@@ -50,10 +50,15 @@ public class RegistrationStepDefinitions {
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
-    public void heFillsAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) throws ParseException {
+    public void heFillsAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) {
         actor.attemptsTo(
                 FillTheFormWith.AccountInformationDetails(title, name, email, password, dateOfBirth)
         );
     }
-
+    @And("{actor} selects {string} checkbox")
+    public void heSelectsCheckbox(Actor actor, String checkBox) {
+        actor.attemptsTo(
+                ClickOnThe.SelectedCheckbox(checkBox)
+        );
+    }
 }

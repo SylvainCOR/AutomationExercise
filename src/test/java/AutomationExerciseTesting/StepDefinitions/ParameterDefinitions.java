@@ -21,17 +21,9 @@ public class ParameterDefinitions {
     }
     @After
     public void tearDown() {
-        Actor actor = OnStage.theActorInTheSpotlight();
-        BrowseTheWeb browseTheWebAbility = actor.usingAbilityTo(BrowseTheWeb.class);
-        if (browseTheWebAbility != null) {
-            WebDriver driver = browseTheWebAbility.getDriver();
-            if (driver != null) {
-                try {
-                    driver.quit();
-                } catch (Exception e) {
-                    System.err.println("Error while closing the browser: " + e.getMessage());
-                }
-            }
+        WebDriver driver = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).getDriver();
+        if (driver != null) {
+            driver.quit();
         }
     }
 }

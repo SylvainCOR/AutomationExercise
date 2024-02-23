@@ -16,7 +16,7 @@ public class SignupPage {
     public static Target PASSWORD = Target.the("password")
             .locatedBy("#password");
     public static Target DAY_OF_BIRTH = Target.the("day of birth")
-            .locatedBy("#day");
+            .locatedBy("#days");
     public static Target MONTH_OF_BIRTH = Target.the("month of birth")
             .locatedBy("#months");
     public static Target YEAR_OF_BIRTH = Target.the("year of birth")

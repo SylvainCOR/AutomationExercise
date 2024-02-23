@@ -14,5 +14,8 @@ Feature: User Registration
     When he enters name "johnwick" and email "johnwick117@gmail.com"
     And he clicks on Signup button
     Then he can see "ENTER ACCOUNT INFORMATION" on signup page
-    When he fills account information details: Title "Mr", Name "johnwick", Email "johnwick117@gmail.com", Password "secret", Date of birth "16/06/1980"
-
+    When he fills account information details: Title "Mr", Name "johnwick", Email "johnwick117@gmail.com", Password "secret", Date of birth "31/12/1980"
+    And he selects "newsletter" checkbox
+    And he selects "special offer" checkbox
+    And he fills address information details: First name "John", Last name "Wick", Company "", Address "", Address2 "", Country "", State "", City "", Zipcode "", Mobile Number ""
+    And he clicks on Create Account button
