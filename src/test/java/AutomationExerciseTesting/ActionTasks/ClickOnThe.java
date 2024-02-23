@@ -1,8 +1,8 @@
 package AutomationExerciseTesting.ActionTasks;
 
-import AutomationExerciseTesting.PageElements.HomePage;
-import AutomationExerciseTesting.PageElements.LoginPage;
-import AutomationExerciseTesting.PageElements.SignupPage;
+import AutomationExerciseTesting.PageTargets.HomePage;
+import AutomationExerciseTesting.PageTargets.LoginPage;
+import AutomationExerciseTesting.PageTargets.SignupPage;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;

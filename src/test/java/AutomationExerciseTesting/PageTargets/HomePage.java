@@ -1,4 +1,4 @@
-package AutomationExerciseTesting.PageElements;
+package AutomationExerciseTesting.PageTargets;
 
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.screenplay.targets.Target;

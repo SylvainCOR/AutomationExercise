@@ -1,6 +1,6 @@
 package AutomationExerciseTesting.ActionTasks;
 
-import AutomationExerciseTesting.PageElements.HomePage;
+import AutomationExerciseTesting.PageTargets.HomePage;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Open;

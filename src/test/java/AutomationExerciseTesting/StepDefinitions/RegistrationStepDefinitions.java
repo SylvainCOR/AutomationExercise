@@ -1,12 +1,16 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.*;
+import AutomationExerciseTesting.ActionTasks.ClickOnThe;
+import AutomationExerciseTesting.ActionTasks.CompareTextOfThe;
+import AutomationExerciseTesting.ActionTasks.FillTheFormWith;
+import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Date;
 import net.serenitybdd.screenplay.Actor;
+
+import java.text.ParseException;
 
 public class RegistrationStepDefinitions {
 
@@ -46,9 +50,10 @@ public class RegistrationStepDefinitions {
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
-    public void heFillsAccountInformationDetailsTitleNameEmailPasswordDateOfBirth(Actor actor, String title, String name, String email, String password, Date dateOfBirth) {
+    public void heFillsAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) throws ParseException {
         actor.attemptsTo(
                 FillTheFormWith.AccountInformationDetails(title, name, email, password, dateOfBirth)
         );
     }
+
 }

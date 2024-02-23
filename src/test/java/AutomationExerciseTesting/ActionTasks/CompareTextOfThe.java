@@ -1,7 +1,7 @@
 package AutomationExerciseTesting.ActionTasks;
 
-import AutomationExerciseTesting.PageElements.LoginPage;
-import AutomationExerciseTesting.PageElements.SignupPage;
+import AutomationExerciseTesting.PageTargets.LoginPage;
+import AutomationExerciseTesting.PageTargets.SignupPage;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.ensure.Ensure;
@@ -29,14 +29,14 @@ public class CompareTextOfThe {
     public static Performable NameProvided(String expectedName) {
         return Task.where("{0} enters account information details",
                 Ensure.that("check if name is already provided",
-                        Text.of(SignupPage.NAME)).isEqualTo(expectedName)
+                        Text.of(SignupPage.NAME).asString()).isEqualTo(expectedName)
         );
     }
     @SuppressWarnings("unchecked")
     public static Performable EmailProvided(String expectedEmail) {
         return Task.where("{0} enters account information details",
                 Ensure.that("check if email is already provided",
-                        Text.of(SignupPage.NAME)).isEqualTo(expectedEmail)
+                        Text.of(SignupPage.EMAIL).asString()).isEqualTo(expectedEmail)
 
         );
     }
