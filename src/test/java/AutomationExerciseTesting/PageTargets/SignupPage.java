@@ -47,4 +47,6 @@ public class SignupPage {
             .locatedBy("#zipcode");
     public static Target MOBILE_NUMBER = Target.the("mobile number")
             .locatedBy("#mobile_number");
+    public static Target CREATE_ACCOUNT_BUTTON = Target.the("create account")
+            .locatedBy("//section//form/button");
 }

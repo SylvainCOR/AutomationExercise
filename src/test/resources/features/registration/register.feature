@@ -17,5 +17,5 @@ Feature: User Registration
     When he fills account information details: Title "Mr", Name "johnwick", Email "johnwick117@gmail.com", Password "secret", Date of birth "31/12/1980"
     And he selects "newsletter" checkbox
     And he selects "special offer" checkbox
-    And he fills address information details: First name "John", Last name "Wick", Company "", Address "", Address2 "", Country "", State "", City "", Zipcode "", Mobile Number ""
+    And he fills address information details: First name "John", Last name "Wick", Company "Continental", Address "6 Lewes Blvd", Address2 "", Country "Canada", State "Yukon", City "Whitehorse", Zipcode "Y1A3J4", Mobile Number "+18675555555"
     And he clicks on Create Account button

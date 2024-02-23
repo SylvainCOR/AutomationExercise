@@ -1,16 +1,10 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.ClickOnThe;
-import AutomationExerciseTesting.ActionTasks.CompareTextOfThe;
-import AutomationExerciseTesting.ActionTasks.FillTheFormWith;
-import AutomationExerciseTesting.ActionTasks.NavigateToThe;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import AutomationExerciseTesting.ActionTasks.*;
+import AutomationExerciseTesting.PageTargets.*;
+import io.cucumber.java.en.*;
 import net.serenitybdd.screenplay.Actor;
-
-import java.text.ParseException;
+import net.serenitybdd.screenplay.actions.Click;
 
 public class RegistrationStepDefinitions {
 
@@ -22,7 +16,7 @@ public class RegistrationStepDefinitions {
     @When("{actor} clicks on Signup Login button")
     public void clickOnSignUpLoginLink(Actor actor) {
         actor.attemptsTo(
-                ClickOnThe.SignUpLoginLink()
+                Click.on(HomePage.SIGN_UP_LOGIN_LINK)
         );
     }
     @Then("{actor} can see {string} on login page")
@@ -40,7 +34,7 @@ public class RegistrationStepDefinitions {
     @And("{actor} clicks on Signup button")
     public void clickOnSignupButton(Actor actor) {
         actor.attemptsTo(
-                ClickOnThe.SignUpButton()
+                Click.on(LoginPage.SIGN_UP_BUTTON)
         );
     }
     @Then("{actor} can see {string} on signup page")
@@ -50,15 +44,28 @@ public class RegistrationStepDefinitions {
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
-    public void heFillsAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) {
+    public void fillAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) {
         actor.attemptsTo(
                 FillTheFormWith.AccountInformationDetails(title, name, email, password, dateOfBirth)
         );
     }
     @And("{actor} selects {string} checkbox")
-    public void heSelectsCheckbox(Actor actor, String checkBox) {
+    public void selectCheckbox(Actor actor, String checkBox) {
         actor.attemptsTo(
                 ClickOnThe.SelectedCheckbox(checkBox)
+        );
+    }
+    @And("{actor} fills address information details: First name {string}, Last name {string}, Company {string}, Address {string}, Address2 {string}, Country {string}, State {string}, City {string}, Zipcode {string}, Mobile Number {string}")
+    public void fillAddressInformationDetails(Actor actor, String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipcode, String number) {
+        actor.attemptsTo(
+                FillTheFormWith.AddressInformationDetails(firstName, lastName,
+                        company, address, address2, country, state, city, zipcode, number)
+        );
+    }
+    @And("{actor} clicks on Create Account button")
+    public void clickCreateAccountButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
         );
     }
 }
