@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.questions.Value;
 
 public class CompareTextOfThe {
 
@@ -29,14 +30,14 @@ public class CompareTextOfThe {
     public static Performable NameProvided(String expectedName) {
         return Task.where("{0} enters account information details",
                 Ensure.that("check if name is already provided",
-                        Text.of(SignupPage.NAME).asString()).isEqualTo(expectedName)
+                        Value.of(SignupPage.NAME).asString()).isEqualTo(expectedName)
         );
     }
     @SuppressWarnings("unchecked")
     public static Performable EmailProvided(String expectedEmail) {
         return Task.where("{0} enters account information details",
                 Ensure.that("check if email is already provided",
-                        Text.of(SignupPage.EMAIL).asString()).isEqualTo(expectedEmail)
+                        Value.of(SignupPage.EMAIL).asString()).isEqualTo(expectedEmail)
 
         );
     }
