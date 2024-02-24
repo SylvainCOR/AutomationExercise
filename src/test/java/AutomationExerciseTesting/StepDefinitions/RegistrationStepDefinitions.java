@@ -5,6 +5,10 @@ import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.*;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.questions.Visibility;
+import net.serenitybdd.screenplay.questions.WebElementQuestion;
 
 public class RegistrationStepDefinitions {
 
@@ -22,7 +26,7 @@ public class RegistrationStepDefinitions {
     @Then("{actor} can see {string} on login page")
     public void checkSignUpTitle(Actor actor, String expectedTitle) {
         actor.attemptsTo(
-                CompareTextOfThe.SignUpTitleWith(expectedTitle)
+                Ensure.that(Text.of(LoginPage.SIGN_UP_TITLE)).isEqualToIgnoringCase(expectedTitle)
         );
     }
     @When("{actor} enters name {string} and email {string}")
@@ -40,7 +44,7 @@ public class RegistrationStepDefinitions {
     @Then("{actor} can see {string} on signup page")
     public void checkAccountInfoTitle(Actor actor, String expectedTitle) {
         actor.attemptsTo(
-                CompareTextOfThe.AccountInfoTitleWith(expectedTitle)
+                Ensure.that(Text.of(SignupPage.ACCOUNT_INFO_TITLE)).isEqualToIgnoringCase(expectedTitle)
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
@@ -66,6 +70,50 @@ public class RegistrationStepDefinitions {
     public void clickCreateAccountButton(Actor actor) {
         actor.attemptsTo(
                 Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
+        );
+    }
+    @Then("{actor} can see {string} on account_created page")
+    public void checkAccountCreatedTitle(Actor actor, String expectedTitle) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(AccountCreatedPage.ACCOUNT_CREATED_TITLE)).isEqualToIgnoringCase(expectedTitle)
+        );
+    }
+    @When("{actor} clicks on Continue button from account_created page")
+    public void clickOnContinueButtonAccountCreatedPage(Actor actor) {
+        actor.attemptsTo(
+                Click.on(AccountCreatedPage.CONTINUE_BUTTON)
+        );
+    }
+    @Then("{actor} can see {string} {string} on home page")
+    public void checkLoggedIn(Actor actor, String expectedText, String username) {
+        System.out.println(Text.of(HomePage.LOGGED_IN));
+        System.out.println(expectedText + username);
+        actor.attemptsTo(
+                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase(expectedText + username)
+        );
+    }
+    @When("{actor} clicks on Delete Account button")
+    public void clickOnDeleteAccountButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.DELETE_ACCOUNT)
+        );
+    }
+    @Then("{actor} can see {string} on delete_account page")
+    public void checkAccountDeletedTitle(Actor actor, String expectedTitle) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(DeleteAccountPage.DELETE_ACCOUNT_TITLE)).isEqualToIgnoringCase(expectedTitle)
+        );
+    }
+    @When("{actor} clicks on Continue button from delete_account page")
+    public void clickOnContinueButtonDeleteAccountPage(Actor actor) {
+        actor.attemptsTo(
+                Click.on(DeleteAccountPage.CONTINUE_BUTTON)
+        );
+    }
+    @Then("{actor} can see the home page")
+    public void heCanSeeTheHomePage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(HomePage.HOME_LINK)).isTrue()
         );
     }
 }

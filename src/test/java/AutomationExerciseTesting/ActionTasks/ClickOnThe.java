@@ -4,7 +4,6 @@ import AutomationExerciseTesting.PageTargets.SignupPage;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.ScrollToTarget;
 import net.serenitybdd.screenplay.targets.Target;
 
 public class ClickOnThe {

@@ -21,7 +21,7 @@ public class SelectFromDropDown {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = dateFormat.parse(dateOfBirth);
-            String day = new SimpleDateFormat("dd").format(date);
+            String day = new SimpleDateFormat("d").format(date);
             String month = new SimpleDateFormat("MM").format(date);
             String year = new SimpleDateFormat("yyyy").format(date);
 

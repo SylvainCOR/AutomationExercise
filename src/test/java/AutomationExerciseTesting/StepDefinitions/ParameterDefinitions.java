@@ -19,11 +19,4 @@ public class ParameterDefinitions {
     public void setTheStage() {
         OnStage.setTheStage(new OnlineCast());
     }
-/*    @After
-    public void tearDown() {
-        WebDriver driver = BrowseTheWeb.as(OnStage.theActorInTheSpotlight()).getDriver();
-        if (driver != null) {
-            driver.quit();
-        }
-    }*/
 }
