@@ -1,14 +1,18 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.*;
+import AutomationExerciseTesting.ActionTasks.ClickOnThe;
+import AutomationExerciseTesting.ActionTasks.FillTheFormWith;
+import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import AutomationExerciseTesting.PageTargets.*;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
-import net.serenitybdd.screenplay.questions.WebElementQuestion;
 
 public class RegistrationStepDefinitions {
 
