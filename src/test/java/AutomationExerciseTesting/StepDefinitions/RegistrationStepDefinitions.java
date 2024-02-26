@@ -91,11 +91,8 @@ public class RegistrationStepDefinitions {
     }
     @Then("{actor} can see {string} {string} on home page")
     public void checkLoggedIn(Actor actor, String expectedText, String username) {
-        String loggedInText = String.valueOf(Text.of(HomePage.LOGGED_IN));
-        String usernameText = String.valueOf(Text.of(HomePage.USERNAME));
         actor.attemptsTo(
-                Ensure.that(loggedInText + usernameText)
-                        .isEqualToIgnoringCase(expectedText + username)
+                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase(expectedText + username)
         );
     }
     @When("{actor} clicks on Delete Account button")
