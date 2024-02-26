@@ -6,8 +6,8 @@ Feature: User Registration
   Background:
     Given User launched browser and go to Automation Exercise home page
 
-  @TestCase1
-  Scenario: Test Case 1: Register User
+  @TestCase1 # Register user
+  Scenario: Register User to create an account and then delete the account
     When he clicks on Signup Login button
     Then he can see "New User Signup!" on login page
     When he enters name "captainFlint" and email "johnflint@protonmail.ch"
@@ -25,3 +25,11 @@ Feature: User Registration
     Then he can see "ACCOUNT DELETED!" on delete_account page
     When he clicks on Continue button from delete_account page
     Then he can see the home page
+
+  @TestCase5 # Register User with existing email
+  Scenario: Trying to register a user with existing account
+    When he clicks on Signup Login button
+    Then he can see "New User Signup!" on login page
+    When he enters name "LongJohnSilver" and email "longjohnsilver@protonmail.ch"
+    And he clicks on Signup button
+    Then he can see signup error message "Email Address already exist!"

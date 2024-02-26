@@ -11,6 +11,8 @@ public class LoginPage {
             .locatedBy("//*[@class='signup-form']//*[@name='email']");
     public static Target SIGN_UP_BUTTON = Target.the("signup form button")
             .locatedBy("//div[@class='signup-form']//button");
+    public static Target SIGN_UP_ERROR_MESSAGE = Target.the("signup error message")
+            .locatedBy("//*[@class='signup-form']//p");
 
     public static Target LOG_IN_TITLE = Target.the("login form title")
             .locatedBy("//*[@class='login-form']/h2");
@@ -20,5 +22,6 @@ public class LoginPage {
             .locatedBy("//*[@name='password']");
     public static Target LOG_IN_BUTTON = Target.the("login form button")
             .locatedBy("//*[@class='login-form']//button");
-
+    public static Target LOG_IN_ERROR_MESSAGE = Target.the("login error message")
+            .locatedBy("//*[@class='login-form']//p");
 }

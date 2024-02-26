@@ -18,8 +18,9 @@ public class RegistrationStepDefinitions {
 
     @Given("{actor} launched browser and go to Automation Exercise home page")
     public void goToAutomationExerciseHomePage(Actor actor) {
-        actor.wasAbleTo(
-                NavigateToThe.AutomationExerciseHomePage());
+        actor.attemptsTo(
+                NavigateToThe.AutomationExerciseHomePage()
+        );
     }
     @When("{actor} clicks on Signup Login button")
     public void clickOnSignUpLoginLink(Actor actor) {
@@ -90,10 +91,11 @@ public class RegistrationStepDefinitions {
     }
     @Then("{actor} can see {string} {string} on home page")
     public void checkLoggedIn(Actor actor, String expectedText, String username) {
-        System.out.println(Text.of(HomePage.LOGGED_IN));
-        System.out.println(expectedText + username);
+        String loggedInText = String.valueOf(Text.of(HomePage.LOGGED_IN));
+        String usernameText = String.valueOf(Text.of(HomePage.USERNAME));
         actor.attemptsTo(
-                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase(expectedText + username)
+                Ensure.that(loggedInText + usernameText)
+                        .isEqualToIgnoringCase(expectedText + username)
         );
     }
     @When("{actor} clicks on Delete Account button")
@@ -115,9 +117,16 @@ public class RegistrationStepDefinitions {
         );
     }
     @Then("{actor} can see the home page")
-    public void heCanSeeTheHomePage(Actor actor) {
+    public void checkHomePageIsVisible(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(Visibility.of(HomePage.HOME_LINK)).isTrue()
+        );
+    }
+
+    @Then("{actor} can see signup error message {string}")
+    public void checkSignUpErrorMessage(Actor actor, String expectedMessage) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(LoginPage.SIGN_UP_ERROR_MESSAGE)).isEqualToIgnoringCase(expectedMessage)
         );
     }
 }

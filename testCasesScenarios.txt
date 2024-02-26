@@ -1,9 +1,10 @@
 Definition of high level testcases in gherkin language
 
-Useful data :
+  Useful data :
   Existing account : Username "LongJohnSilver", Email "longjohnsilver@protonmail.ch", Password "hispaniola"
+  New user : Username "captainFlint", Email "johnflint@protonmail.ch", Password "walrus"
 
-Test Case 1: Register User
+  @TestCase1 # Register user
   Scenario: Register User to create an account and then delete the account
     Given User launched browser and go to Automation Exercise home page
     When he clicks on Signup Login button
@@ -18,15 +19,28 @@ Test Case 1: Register User
     And he clicks on Create Account button
     Then he can see "ACCOUNT CREATED!" on account_created page
     When he clicks on Continue button from account_created page
-    Then he can see "Logged in as" "captainFlint" on home page
+    Then he can see "Logged in as " "captainFlint" on home page
     When he clicks on Delete Account button
     Then he can see "ACCOUNT DELETED!" on delete_account page
     When he clicks on Continue button from delete_account page
     Then he can see the home page
 
+  @TestCase2 # Login User with correct email and password
+  Scenario: Login with existing account and then delete the account
+    Given User launched browser and go to Automation Exercise home page
+    When he clicks on Signup Login button
+    Then he can see "Login to your account" on login page
+    When he enters email "johnflint@protonmail.ch" and password "walrus"
+    And he clicks on Login button
+    Then he can see "Logged in as " "captainFlint" on main page
+    When he clicks on Delete Account button
+    Then he can see "ACCOUNT DELETED!" on delete_account page
 
-Test Case 5: Register User with existing email
+  @TestCase5 # Register User with existing email
   Scenario: Trying to register a user with existing account
+    Given User launched browser and go to Automation Exercise home page
     When he clicks on Signup Login button
     Then he can see "New User Signup!" on login page
     When he enters name "LongJohnSilver" and email "longjohnsilver@protonmail.ch"
+    And he clicks on Signup button
+    Then he can see signup error message "Email Address already exist!"

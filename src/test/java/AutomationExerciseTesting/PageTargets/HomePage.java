@@ -12,9 +12,12 @@ public class HomePage extends PageObject {
     public static Target SIGN_UP_LOGIN_LINK = Target.the("header signup login link")
             .locatedBy("//a[contains(.,'Signup')]");
     public static Target LOGGED_IN = Target.the("header logged in as username link")
-            .locatedBy("//header//a[@class]");
+            .locatedBy("//header//i[contains(@class,'user')]");
+    public static Target USERNAME = Target.the("header logged in as username link")
+            .locatedBy("//b");
     public static Target DELETE_ACCOUNT = Target.the("header delete account link")
             .locatedBy("//*[contains(@href,'delete')]");
     public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
             .locatedBy("#subscribe");
+
 }
