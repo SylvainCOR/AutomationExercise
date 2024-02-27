@@ -166,4 +166,16 @@ public class StepDefinitions {
                 Ensure.that(Visibility.of(LoginPage.LOG_IN_TITLE)).isTrue()
         );
     }
+    @When("{actor} clicks on Contact Us button")
+    public void userClicksOnContactUsButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.CONTACT_US_BUTTON)
+        );
+    }
+    @Then("{actor} can see contact form title: GET IN TOUCH")
+    public void userCanSeeContactFormTitle(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(LoginPage.LOG_IN_TITLE)).isTrue()
+        );
+    }
 }

@@ -1,7 +1,7 @@
 Feature: Login options
   As a user
-  I want to log in, log out or delete my account
-  So that I can visit website and manage my account
+  I want to log in and log out
+  So that I can visit website and quit
 
   @TestCase2 # Login User with correct email and password
   Scenario Outline: Login with existing account

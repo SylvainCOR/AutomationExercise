@@ -8,16 +8,20 @@ import net.thucydides.core.pages.PageObject;
 public class HomePage extends PageObject {
 
     public static Target HOME_LINK = Target.the("header home link")
-            .locatedBy("//*[contains(@class,'home')]");
+            .locatedBy("//i[contains(@class,'home')]/..");
     public static Target SIGN_UP_LOGIN_LINK = Target.the("header signup login link")
-            .locatedBy("//a[contains(.,'Signup')]");
+            .locatedBy("//i[contains(@class,'lock')]/..");
     public static Target LOGGED_IN = Target.the("header logged in as username link")
-            .locatedBy("(//header//a)[last()]");
+            .locatedBy("//i[contains(@class,'user')]/..");
     public static Target LOG_OUT_LINK = Target.the("header log out link")
-            .locatedBy("//a[contains(.,'Logout')]");
+            .locatedBy("//i[contains(@class,'lock')]/..");
     public static Target DELETE_ACCOUNT = Target.the("header delete account link")
-            .locatedBy("//*[contains(@href,'delete')]");
-//    public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
-//            .locatedBy("#subscribe");
+            .locatedBy("//i[contains(@class,'trash')]/..");
+    public static Target CONTACT_US_BUTTON = Target.the("contact us link")
+            .locatedBy("//i[contains(@class,'envelope')]/..");
+    public static Target SLIDER_CAROUSEL = Target.the("presentation carousel")
+            .locatedBy("#slider-carousel");
+    public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
+            .locatedBy("#subscribe");
 
 }
