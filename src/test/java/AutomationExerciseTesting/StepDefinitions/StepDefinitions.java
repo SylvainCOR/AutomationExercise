@@ -1,6 +1,5 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.ClickOnThe;
 import AutomationExerciseTesting.ActionTasks.FillTheFormWith;
 import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import AutomationExerciseTesting.PageTargets.*;
@@ -14,7 +13,7 @@ import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 
-public class RegistrationStepDefinitions {
+public class StepDefinitions {
 
     @Given("{actor} launched browser and go to Automation Exercise home page")
     public void goToAutomationExerciseHomePage(Actor actor) {
@@ -28,10 +27,10 @@ public class RegistrationStepDefinitions {
                 Click.on(HomePage.SIGN_UP_LOGIN_LINK)
         );
     }
-    @Then("{actor} can see {string} on login page")
-    public void checkSignUpTitle(Actor actor, String expectedTitle) {
+    @Then("{actor} can see: New User Signup!")
+    public void checkSignUpTitle(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Text.of(LoginPage.SIGN_UP_TITLE)).isEqualToIgnoringCase(expectedTitle)
+                Ensure.that(Text.of(LoginPage.SIGN_UP_TITLE)).isEqualToIgnoringCase("New User Signup!")
         );
     }
     @When("{actor} enters name {string} and email {string}")
@@ -46,10 +45,10 @@ public class RegistrationStepDefinitions {
                 Click.on(LoginPage.SIGN_UP_BUTTON)
         );
     }
-    @Then("{actor} can see {string} on signup page")
-    public void checkAccountInfoTitle(Actor actor, String expectedTitle) {
+    @Then("{actor} can see: ENTER ACCOUNT INFORMATION")
+    public void checkAccountInfoTitle(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Text.of(SignupPage.ACCOUNT_INFO_TITLE)).isEqualToIgnoringCase(expectedTitle)
+                Ensure.that(Text.of(SignupPage.ACCOUNT_INFO_TITLE)).isEqualToIgnoringCase("ENTER ACCOUNT INFORMATION")
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
@@ -58,10 +57,16 @@ public class RegistrationStepDefinitions {
                 FillTheFormWith.AccountInformationDetails(title, name, email, password, dateOfBirth)
         );
     }
-    @And("{actor} selects {string} checkbox")
-    public void selectCheckbox(Actor actor, String checkBox) {
+    @And("{actor} selects newsletter checkbox")
+    public void selectNewsletterCheckbox(Actor actor) {
         actor.attemptsTo(
-                ClickOnThe.SelectedCheckbox(checkBox)
+                Click.on(SignupPage.NEWSLETTER_CHECKBOX)
+        );
+    }
+    @And("{actor} selects special offers checkbox")
+    public void selectSpecialOffersCheckbox(Actor actor) {
+        actor.attemptsTo(
+                Click.on(SignupPage.SPECIAL_OFFERS_CHECKBOX)
         );
     }
     @And("{actor} fills address information details: First name {string}, Last name {string}, Company {string}, Address {string}, Address2 {string}, Country {string}, State {string}, City {string}, Zipcode {string}, Mobile Number {string}")
@@ -77,22 +82,22 @@ public class RegistrationStepDefinitions {
                 Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
         );
     }
-    @Then("{actor} can see {string} on account_created page")
-    public void checkAccountCreatedTitle(Actor actor, String expectedTitle) {
+    @Then("{actor} can see: ACCOUNT CREATED!")
+    public void checkAccountCreatedTitle(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Text.of(AccountCreatedPage.ACCOUNT_CREATED_TITLE)).isEqualToIgnoringCase(expectedTitle)
+                Ensure.that(Text.of(AccountCreatedPage.ACCOUNT_CREATED_TITLE)).isEqualToIgnoringCase("ACCOUNT CREATED!")
         );
     }
-    @When("{actor} clicks on Continue button from account_created page")
+    @When("{actor} clicks on account_created page Continue button")
     public void clickOnContinueButtonAccountCreatedPage(Actor actor) {
         actor.attemptsTo(
                 Click.on(AccountCreatedPage.CONTINUE_BUTTON)
         );
     }
-    @Then("{actor} can see {string} {string} on home page")
-    public void checkLoggedIn(Actor actor, String expectedText, String username) {
+    @Then("{actor} can see Logged in as {string} on home page")
+    public void checkLoggedIn(Actor actor, String username) {
         actor.attemptsTo(
-                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase(expectedText + username)
+                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase("Logged in as " + username)
         );
     }
     @When("{actor} clicks on Delete Account button")
@@ -101,13 +106,13 @@ public class RegistrationStepDefinitions {
                 Click.on(HomePage.DELETE_ACCOUNT)
         );
     }
-    @Then("{actor} can see {string} on delete_account page")
-    public void checkAccountDeletedTitle(Actor actor, String expectedTitle) {
+    @Then("{actor} can see: ACCOUNT DELETED!")
+    public void checkAccountDeletedTitle(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Text.of(DeleteAccountPage.DELETE_ACCOUNT_TITLE)).isEqualToIgnoringCase(expectedTitle)
+                Ensure.that(Text.of(DeleteAccountPage.DELETE_ACCOUNT_TITLE)).isEqualToIgnoringCase("ACCOUNT DELETED!")
         );
     }
-    @When("{actor} clicks on Continue button from delete_account page")
+    @When("{actor} clicks on delete_account page Continue button")
     public void clickOnContinueButtonDeleteAccountPage(Actor actor) {
         actor.attemptsTo(
                 Click.on(DeleteAccountPage.CONTINUE_BUTTON)
@@ -119,11 +124,46 @@ public class RegistrationStepDefinitions {
                 Ensure.that(Visibility.of(HomePage.HOME_LINK)).isTrue()
         );
     }
-
     @Then("{actor} can see signup error message {string}")
     public void checkSignUpErrorMessage(Actor actor, String expectedMessage) {
         actor.attemptsTo(
                 Ensure.that(Text.of(LoginPage.SIGN_UP_ERROR_MESSAGE)).isEqualToIgnoringCase(expectedMessage)
+        );
+    }
+    @When("{actor} enters email {string} and password {string}")
+    public void enterEmailAndPassword(Actor actor, String email, String password) {
+        actor.attemptsTo(
+                FillTheFormWith.EmailAndPassword(email, password)
+        );
+    }
+    @And("{actor} clicks on Login button")
+    public void clickOnLoginButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(LoginPage.LOG_IN_BUTTON)
+        );
+    }
+    @Then("{actor} can see login title: Login to your account")
+    public void checkLoginTitle(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(LoginPage.LOG_IN_TITLE)).isEqualToIgnoringCase("Login to your account")
+        );
+    }
+    @Then("{actor} can see login error message: Your email or password is incorrect!")
+    public void checkLoginErrorMessage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(LoginPage.LOG_IN_ERROR_MESSAGE)).isEqualToIgnoringCase("Your email or password is incorrect!")
+        );
+    }
+    @When("{actor} clicks on Logout button")
+    public void clickOnLogoutButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.LOG_OUT_LINK)
+        );
+    }
+    @Then("{actor} can see the login page")
+    public void actorCanSeeTheLoginPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(LoginPage.LOG_IN_TITLE)).isTrue()
         );
     }
 }

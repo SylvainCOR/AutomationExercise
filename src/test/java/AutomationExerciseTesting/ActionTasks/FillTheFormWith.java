@@ -2,19 +2,13 @@ package AutomationExerciseTesting.ActionTasks;
 
 import AutomationExerciseTesting.PageTargets.LoginPage;
 import AutomationExerciseTesting.PageTargets.SignupPage;
-import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
-import net.serenitybdd.screenplay.actions.ScrollToTarget;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Value;
-import net.serenitybdd.screenplay.waits.WaitUntil;
-
-import java.text.ParseException;
-import java.time.Duration;
 
 public class FillTheFormWith {
 
@@ -22,6 +16,12 @@ public class FillTheFormWith {
         return Task.where("{0} enters name and email",
                 Enter.theValue(name).into(LoginPage.SIGN_UP_NAME_FIELD),
                 Enter.theValue(email).into(LoginPage.SIGN_UP_EMAIL_FIELD)
+        );
+    }
+    public static Performable EmailAndPassword(String email, String password) {
+        return Task.where("{0} enters name and email",
+                Enter.theValue(email).into(LoginPage.LOG_IN_EMAIL_FIELD),
+                Enter.theValue(password).into(LoginPage.LOG_IN_PASSWORD_FIELD)
         );
     }
     public static Performable AccountInformationDetails(String title, String name, String email, String password, String dateOfBirth) {

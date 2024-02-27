@@ -18,14 +18,4 @@ public class ClickOnThe {
                 Click.on(targetElement)
         );
     }
-    public static Performable SelectedCheckbox(String checkBox) {
-        Target targetElement = switch (checkBox.toLowerCase()) {
-            case "newsletter" -> SignupPage.NEWSLETTER_CHECKBOX;
-            case "special offer" -> SignupPage.SPECIAL_OFFERS_CHECKBOX;
-            default -> throw new IllegalArgumentException("Invalid checkbox value: " + checkBox);
-        };
-        return Task.where("{0} selects the '" + checkBox + "' checkbox",
-                Click.on(targetElement)
-        );
-    }
 }
