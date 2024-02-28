@@ -11,7 +11,7 @@ Feature: Contact form
     When <actor> enters name <name> email <email> subject <subject> and message <message>
     And <actor> uploads file <filepath>
     And <actor> clicks on Submit button
-    And <actor> clicks on OK button on accept alert
+    And <actor> clicks on dialog box OK button
     Then <actor> can see: Success! Your details have been submitted successfully.
     When <actor> clicks on green Home button
     Then <actor> can see the home page

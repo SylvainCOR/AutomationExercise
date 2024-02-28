@@ -1,6 +1,6 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.AcceptAlert;
+import AutomationExerciseTesting.ActionTasks.DialogBox;
 import AutomationExerciseTesting.ActionTasks.FillTheForm;
 import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import AutomationExerciseTesting.PageTargets.*;
@@ -9,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
@@ -199,10 +200,10 @@ public class StepDefinitions {
                 Scroll.to(ContactUsPage.SUBMIT_BUTTON).then(Click.on(ContactUsPage.SUBMIT_BUTTON))
         );
     }
-    @And("{actor} clicks on OK button on accept alert")
-    public void clickOnOKButtonAcceptAlert(Actor actor) {
+    @And("{actor} clicks on dialog box OK button")
+    public void clickOnDialogBoxOKButton(Actor actor) {
         actor.attemptsTo(
-                AcceptAlert.OkButton(actor)
+                BrowseTheWeb.as(actor).getAlert().accept()
         );
     }
     @Then("{actor} can see: Success! Your details have been submitted successfully.")
