@@ -1,6 +1,7 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.FillTheFormWith;
+import AutomationExerciseTesting.ActionTasks.AcceptAlert;
+import AutomationExerciseTesting.ActionTasks.FillTheForm;
 import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
@@ -9,6 +10,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
@@ -36,7 +39,7 @@ public class StepDefinitions {
     @When("{actor} enters name {string} and email {string}")
     public void enterNameAndEmail(Actor actor, String name, String email) {
         actor.attemptsTo(
-                FillTheFormWith.NameAndEmail(name, email)
+                FillTheForm.ToSignUp(name, email)
         );
     }
     @And("{actor} clicks on Signup button")
@@ -54,7 +57,7 @@ public class StepDefinitions {
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
     public void fillAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) {
         actor.attemptsTo(
-                FillTheFormWith.AccountInformationDetails(title, name, email, password, dateOfBirth)
+                FillTheForm.WithAccountInformation(title, name, email, password, dateOfBirth)
         );
     }
     @And("{actor} selects newsletter checkbox")
@@ -72,7 +75,7 @@ public class StepDefinitions {
     @And("{actor} fills address information details: First name {string}, Last name {string}, Company {string}, Address {string}, Address2 {string}, Country {string}, State {string}, City {string}, Zipcode {string}, Mobile Number {string}")
     public void fillAddressInformationDetails(Actor actor, String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipcode, String number) {
         actor.attemptsTo(
-                FillTheFormWith.AddressInformationDetails(firstName, lastName,
+                FillTheForm.WithAddressInformation(firstName, lastName,
                         company, address, address2, country, state, city, zipcode, number)
         );
     }
@@ -133,7 +136,7 @@ public class StepDefinitions {
     @When("{actor} enters email {string} and password {string}")
     public void enterEmailAndPassword(Actor actor, String email, String password) {
         actor.attemptsTo(
-                FillTheFormWith.EmailAndPassword(email, password)
+                FillTheForm.ToLogIn(email, password)
         );
     }
     @And("{actor} clicks on Login button")
@@ -173,9 +176,45 @@ public class StepDefinitions {
         );
     }
     @Then("{actor} can see contact form title: GET IN TOUCH")
-    public void userCanSeeContactFormTitle(Actor actor) {
+    public void checkContactFormTitle(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Visibility.of(LoginPage.LOG_IN_TITLE)).isTrue()
+                Ensure.that(Visibility.of(ContactUsPage.CONTACT_FORM_TITLE)).isTrue()
+        );
+    }
+    @When("{actor} enters name {string} email {string} subject {string} and message {string}")
+    public void enterNameEmailSubjectAndMessage(Actor actor, String name, String email, String subject, String message) {
+        actor.attemptsTo(
+                FillTheForm.ToContactSupport(name, email, subject, message)
+        );
+    }
+    @And("{actor} uploads file {string}")
+    public void uploadFile(Actor actor, String filepath) {
+        actor.attemptsTo(
+                Enter.theValue(filepath).into(ContactUsPage.UPLOAD_INPUT)
+        );
+    }
+    @And("{actor} clicks on Submit button")
+    public void clickOnSubmitButton(Actor actor) {
+        actor.attemptsTo(
+                Scroll.to(ContactUsPage.SUBMIT_BUTTON).then(Click.on(ContactUsPage.SUBMIT_BUTTON))
+        );
+    }
+    @And("{actor} clicks on OK button on accept alert")
+    public void clickOnOKButtonAcceptAlert(Actor actor) {
+        actor.attemptsTo(
+                AcceptAlert.OkButton(actor)
+        );
+    }
+    @Then("{actor} can see: Success! Your details have been submitted successfully.")
+    public void checkDetailsSubmittedSuccessfully(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(ContactUsPage.SUCCESS_MESSAGE)).isEqualToIgnoringCase("Success! Your details have been submitted successfully.")
+        );
+    }
+    @When("{actor} clicks on green Home button")
+    public void clickOnGreenHomeButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ContactUsPage.HOME_BUTTON)
         );
     }
 }

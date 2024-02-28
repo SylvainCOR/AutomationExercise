@@ -3,15 +3,18 @@ Feature: Contact form
   I want to contact the website team
   So that I can report something or send a file
 
-  @TestCase6 # Contact Us Form
-  Scenario: Send file and message with contact form
-    Given user launched browser and go to Automation Exercise home page
-    When user clicks on Contact Us button
-    Then user can see contact form title: GET IN TOUCH
-    When user enters name "name" email "email" subject "subject" and message "message"
-    And user uploads file "C:/Users/sylva/Downloads/pirate-flag.jpg"
-    And user clicks on Submit button
-    And user clicks on OK button
-    Then user can see: Success! Your details have been submitted successfully.
-    When user clicks on green Home button
-    Then user can see the home page
+  @TestCase6
+  Scenario Outline: Send file and message with contact form
+    Given <actor> launched browser and go to Automation Exercise home page
+    When <actor> clicks on Contact Us button
+    Then <actor> can see contact form title: GET IN TOUCH
+    When <actor> enters name <name> email <email> subject <subject> and message <message>
+    And <actor> uploads file <filepath>
+    And <actor> clicks on Submit button
+    And <actor> clicks on OK button on accept alert
+    Then <actor> can see: Success! Your details have been submitted successfully.
+    When <actor> clicks on green Home button
+    Then <actor> can see the home page
+    Examples:
+      | actor | name         | email                      | subject   | message             | filepath                                   |
+      | user  | "JackRakham" | "jackrakham@protonmail.ch" | "Testing" | "Still practising!" | "C:/Users/sylva/Downloads/pirate-flag.jpg" |

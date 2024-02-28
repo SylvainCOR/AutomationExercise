@@ -1,5 +1,6 @@
 package AutomationExerciseTesting.ActionTasks;
 
+import AutomationExerciseTesting.PageTargets.ContactUsPage;
 import AutomationExerciseTesting.PageTargets.LoginPage;
 import AutomationExerciseTesting.PageTargets.SignupPage;
 import net.serenitybdd.screenplay.Performable;
@@ -10,21 +11,21 @@ import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Value;
 
-public class FillTheFormWith {
+public class FillTheForm {
 
-    public static Performable NameAndEmail(String name, String email) {
+    public static Performable ToSignUp(String name, String email) {
         return Task.where("{0} enters name and email",
                 Enter.theValue(name).into(LoginPage.SIGN_UP_NAME_FIELD),
                 Enter.theValue(email).into(LoginPage.SIGN_UP_EMAIL_FIELD)
         );
     }
-    public static Performable EmailAndPassword(String email, String password) {
-        return Task.where("{0} enters name and email",
+    public static Performable ToLogIn(String email, String password) {
+        return Task.where("{0} enters email and password",
                 Enter.theValue(email).into(LoginPage.LOG_IN_EMAIL_FIELD),
                 Enter.theValue(password).into(LoginPage.LOG_IN_PASSWORD_FIELD)
         );
     }
-    public static Performable AccountInformationDetails(String title, String name, String email, String password, String dateOfBirth) {
+    public static Performable WithAccountInformation(String title, String name, String email, String password, String dateOfBirth) {
         return Task.where("{0} fills account information details",
                 ClickOnThe.TitleGender(title),
                 Ensure.that(Value.of(SignupPage.NAME).asString()).isEqualTo(name),
@@ -34,7 +35,7 @@ public class FillTheFormWith {
                 SelectFromDropDown.DayMonthAndYearOfThe(dateOfBirth)
                 );
     }
-    public static Performable AddressInformationDetails(String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipcode, String number) {
+    public static Performable WithAddressInformation(String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipcode, String number) {
         return Task.where("{0} fills address information details",
                 Enter.theValue(firstName).into(SignupPage.FIRST_NAME),
                 Enter.theValue(lastName).into(SignupPage.LAST_NAME),
@@ -48,5 +49,13 @@ public class FillTheFormWith {
                 Enter.theValue(zipcode).into(SignupPage.ZIPCODE),
                 Enter.theValue(number).into(SignupPage.MOBILE_NUMBER)
         );
+    }
+    public static Performable ToContactSupport(String name, String email, String subject, String message) {
+        return Task.where("{0} fills details to contact support",
+                Enter.theValue(name).into(ContactUsPage.NAME_FIELD),
+                Enter.theValue(email).into(ContactUsPage.EMAIL_FIELD),
+                Enter.theValue(subject).into(ContactUsPage.SUBJECT_FIELD),
+                Enter.theValue(message).into(ContactUsPage.MESSAGE_FIELD)
+                );
     }
 }
