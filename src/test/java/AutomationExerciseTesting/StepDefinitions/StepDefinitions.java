@@ -1,7 +1,7 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.DialogBox;
 import AutomationExerciseTesting.ActionTasks.FillTheForm;
+import AutomationExerciseTesting.ActionTasks.HandleDialogBox;
 import AutomationExerciseTesting.ActionTasks.NavigateToThe;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
@@ -125,7 +125,7 @@ public class StepDefinitions {
     @Then("{actor} can see the home page")
     public void checkHomePageIsVisible(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Visibility.of(HomePage.HOME_LINK)).isTrue()
+                Ensure.that(Visibility.of(HomePage.SLIDER_CAROUSEL)).isTrue()
         );
     }
     @Then("{actor} can see signup error message {string}")
@@ -203,7 +203,7 @@ public class StepDefinitions {
     @And("{actor} clicks on dialog box OK button")
     public void clickOnDialogBoxOKButton(Actor actor) {
         actor.attemptsTo(
-                BrowseTheWeb.as(actor).getAlert().accept()
+                HandleDialogBox.ConfirmAlert(BrowseTheWeb.as(actor).getDriver())
         );
     }
     @Then("{actor} can see: Success! Your details have been submitted successfully.")
