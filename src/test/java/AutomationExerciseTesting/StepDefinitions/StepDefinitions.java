@@ -230,4 +230,10 @@ public class StepDefinitions {
                 Ensure.that(Visibility.of(TestCasesPage.TITLE)).isTrue()
         );
     }
+    @When("{actor} clicks on Products button")
+    public void clickOnProductsButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.PRODUCTS_BUTTON)
+        );
+    }
 }

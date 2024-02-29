@@ -23,6 +23,8 @@ public class HomePage extends PageObject {
             .locatedBy("#slider-carousel");
     public static Target TEST_CASES_BUTTON = Target.the("test cases link")
             .locatedBy("//a[@href='/test_cases']/i");
+    public static Target PRODUCTS_BUTTON = Target.the("products link")
+            .locatedBy("//i[contains(@class,'card_travel')]/..");
     public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
             .locatedBy("#subscribe");
 
