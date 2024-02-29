@@ -3,7 +3,7 @@ Feature: Contact form
   I want to contact the website team
   So that I can report something or send a file
 
-  @TestCase6
+  @TestCase6 # Contact Us Form
   Scenario Outline: Send file and message with contact form
     Given <actor> launched browser and go to Automation Exercise home page
     When <actor> clicks on Contact Us button

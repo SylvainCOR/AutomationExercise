@@ -21,6 +21,8 @@ public class HomePage extends PageObject {
             .locatedBy("//i[contains(@class,'envelope')]/..");
     public static Target SLIDER_CAROUSEL = Target.the("presentation carousel")
             .locatedBy("#slider-carousel");
+    public static Target TEST_CASES_BUTTON = Target.the("test cases link")
+            .locatedBy("//a[@href='/test_cases']/i");
     public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
             .locatedBy("#subscribe");
 

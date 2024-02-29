@@ -218,4 +218,16 @@ public class StepDefinitions {
                 Click.on(ContactUsPage.HOME_BUTTON)
         );
     }
+    @When("{actor} clicks on Test Cases button")
+    public void clickOnTestCasesButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.TEST_CASES_BUTTON)
+        );
+    }
+    @Then("{actor} can see the test_cases page")
+    public void checkTestCasesPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(TestCasesPage.TITLE)).isTrue()
+        );
+    }
 }
