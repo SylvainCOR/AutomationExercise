@@ -13,9 +13,12 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class StepDefinitions {
 
@@ -200,13 +203,13 @@ public class StepDefinitions {
                 Scroll.to(ContactUsPage.SUBMIT_BUTTON).then(Click.on(ContactUsPage.SUBMIT_BUTTON))
         );
     }
-    @And("{actor} clicks on dialog box OK button")
-    public void clickOnDialogBoxOKButton(Actor actor) {
+    @Then("{actor} confirm dialog box")
+    public void confirmDialogBox(Actor actor) {
         actor.attemptsTo(
                 HandleDialogBox.ConfirmAlert(BrowseTheWeb.as(actor).getDriver())
         );
     }
-    @Then("{actor} can see: Success! Your details have been submitted successfully.")
+    @And("{actor} can see: Success! Your details have been submitted successfully.")
     public void checkDetailsSubmittedSuccessfully(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(Text.of(ContactUsPage.SUCCESS_MESSAGE)).isEqualToIgnoringCase("Success! Your details have been submitted successfully.")
@@ -234,6 +237,19 @@ public class StepDefinitions {
     public void clickOnProductsButton(Actor actor) {
         actor.attemptsTo(
                 Click.on(HomePage.PRODUCTS_BUTTON)
+        );
+    }
+    @Then("{actor} can see products list title: ALL PRODUCTS")
+    public void checkProductsListTitle(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("ALL PRODUCTS")
+        );
+    }
+    @And("the product list is visible")
+    public void theProductListIsVisible() {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ProductsPage.PRODUCTS_LIST)).isTrue()
         );
     }
 }

@@ -7,3 +7,8 @@ Feature: Search and add products
   Scenario: Verify navigation to test cases page
     Given Customer launched browser and go to Automation Exercise home page
     When he clicks on Products button
+    Then he can see products list title: ALL PRODUCTS
+    And the product list is visible
+    When he clicks on View Product of first product
+    Then he is landed to product detail page
+    And details visible are : product name, category, price, availability, condition, brand
