@@ -3,6 +3,7 @@ package AutomationExerciseTesting.StepDefinitions;
 import AutomationExerciseTesting.ActionTasks.FillTheForm;
 import AutomationExerciseTesting.ActionTasks.HandleDialogBox;
 import AutomationExerciseTesting.ActionTasks.NavigateToThe;
+import AutomationExerciseTesting.ActionTasks.VerifyThat;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -246,10 +247,28 @@ public class StepDefinitions {
         );
     }
     @And("the product list is visible")
-    public void theProductListIsVisible() {
+    public void checkProductListIsVisible() {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
                 Ensure.that(Visibility.of(ProductsPage.PRODUCTS_LIST)).isTrue()
+        );
+    }
+    @When("{actor} clicks on View Product of first product")
+    public void clickOnViewProductOfFirstProduct(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.FIRST_VIEW_PRODUCT)
+        );
+    }
+    @Then("{actor} is landed to product_details page")
+    public void checkProductDetailsPage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ProductDetailsPage.PRODUCT_DETAILS)).isTrue()
+        );
+    }
+    @And("{actor} can see details: product name, category, price, availability, condition, brand")
+    public void checkDetailsOfTheProduct(Actor actor) {
+        actor.attemptsTo(
+                VerifyThat.DetailsAreVisible()
         );
     }
 }

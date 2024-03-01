@@ -6,7 +6,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.targets.Target;
 
-public class ClickOnThe {
+public class SelectThe {
 
     public static Performable TitleGender(String title) {
         Target targetElement = switch (title.toLowerCase()) {

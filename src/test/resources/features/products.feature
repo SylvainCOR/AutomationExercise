@@ -10,5 +10,5 @@ Feature: Search and add products
     Then he can see products list title: ALL PRODUCTS
     And the product list is visible
     When he clicks on View Product of first product
-    Then he is landed to product detail page
-    And details visible are : product name, category, price, availability, condition, brand
+    Then he is landed to product_details page
+    And he can see details: product name, category, price, availability, condition, brand

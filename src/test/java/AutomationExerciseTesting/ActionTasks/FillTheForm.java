@@ -27,7 +27,7 @@ public class FillTheForm {
     }
     public static Performable WithAccountInformation(String title, String name, String email, String password, String dateOfBirth) {
         return Task.where("{0} fills account information details",
-                ClickOnThe.TitleGender(title),
+                SelectThe.TitleGender(title),
                 Ensure.that(Value.of(SignupPage.NAME).asString()).isEqualTo(name),
                 Ensure.that(Value.of(SignupPage.EMAIL).asString()).isEqualTo(email),
                 Enter.theValue(password).into(SignupPage.PASSWORD),
