@@ -16,5 +16,5 @@ Feature: Contact form
     When <actor> clicks on green Home button
     Then <actor> can see the home page
     Examples:
-      | actor | name         | email                      | subject   | message             | filepath                                   |
-      | user  | "JackRakham" | "jackrakham@protonmail.ch" | "Testing" | "Still practising!" | "C:/Users/sylva/Downloads/pirate-flag.jpg" |
+      | actor   | name         | email                      | subject   | message             | filepath                                   |
+      | Visitor | "JackRakham" | "jackrakham@protonmail.ch" | "Testing" | "Still practising!" | "C:/Users/sylva/Downloads/pirate-flag.jpg" |

@@ -19,8 +19,6 @@ import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-
 public class StepDefinitions {
 
     @Given("{actor} launched browser and go to Automation Exercise home page")

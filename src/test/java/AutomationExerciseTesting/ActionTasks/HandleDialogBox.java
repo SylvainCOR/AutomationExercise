@@ -1,9 +1,9 @@
 package AutomationExerciseTesting.ActionTasks;
 
 import net.serenitybdd.screenplay.Actor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 
 public class HandleDialogBox {
 
