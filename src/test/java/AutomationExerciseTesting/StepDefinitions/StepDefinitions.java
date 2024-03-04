@@ -325,4 +325,10 @@ public class StepDefinitions {
                 Ensure.that(Displayed.of(HomePage.SUCCESS_MESSAGE)).isTrue()
         );
     }
+    @When("{actor} clicks on Cart button")
+    public void customerClicksOnCartButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.CART_BUTTON)
+        );
+    }
 }

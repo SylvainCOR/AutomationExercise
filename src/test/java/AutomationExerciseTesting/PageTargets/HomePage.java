@@ -35,4 +35,6 @@ public class HomePage extends PageObject {
             .locatedBy("#subscribe");
     public static Target SUCCESS_MESSAGE = Target.the("success message")
             .locatedBy("//*[@id='success-subscribe']/div");
+    public static Target CART_BUTTON = Target.the("cart link")
+            .locatedBy("//i[contains(@class,'cart')]/..");
 }
