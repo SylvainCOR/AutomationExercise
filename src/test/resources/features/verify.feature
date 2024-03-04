@@ -1,9 +1,9 @@
 Feature: Access to exercise page
-  As a new tester
+  As a tester
   I want to go to test cases page
   So that I can practise with automation
 
-  @TestCase7
+  @TestCase7 # Verify Test Cases Page
   Scenario Outline: Verify navigation to test cases page
     Given <actor> launched browser and go to Automation Exercise home page
     When <actor> clicks on Test Cases button
@@ -11,3 +11,4 @@ Feature: Access to exercise page
     Examples:
       | actor  |
       | Tester |
+

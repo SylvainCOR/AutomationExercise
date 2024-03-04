@@ -25,7 +25,14 @@ public class HomePage extends PageObject {
             .locatedBy("//a[@href='/test_cases']/i");
     public static Target PRODUCTS_BUTTON = Target.the("products link")
             .locatedBy("//i[contains(@class,'card_travel')]/..");
-    public static Target SUBSCRIBE_BUTTON = Target.the("footer subscribe button")
+    public static Target FOOTER = Target.the("footer")
+            .locatedBy("#footer");
+    public static Target SUBSCRIBE_TITLE = Target.the("subscribe title")
+            .locatedBy("//*[@id='footer']//h2");
+    public static Target SUBSCRIBE_INPUT = Target.the("input email")
+            .locatedBy("#susbscribe_email");
+    public static Target SUBSCRIBE_BUTTON = Target.the("arrow button")
             .locatedBy("#subscribe");
-
+    public static Target SUCCESS_MESSAGE = Target.the("success message")
+            .locatedBy("//*[@id='success-subscribe']/div");
 }

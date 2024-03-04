@@ -16,6 +16,7 @@ import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.Displayed;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 
@@ -292,6 +293,36 @@ public class StepDefinitions {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
                 Ensure.that(Text.ofEach(ProductsPage.PRODUCT_NAME).asString()).containsIgnoringCase(productName)
+        );
+    }
+    @When("{actor} scrolls down to footer")
+    public void scrollDownToFooter(Actor actor) {
+        actor.attemptsTo(
+                Scroll.to(HomePage.FOOTER)
+        );
+    }
+    @Then("{actor} can see title: SUBSCRIPTION")
+    public void checkTitleSUBSCRIPTION(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(HomePage.SUBSCRIBE_TITLE)).isEqualToIgnoringCase("SUBSCRIPTION")
+        );
+    }
+    @When("{actor} enters email {string} in input")
+    public void enterEmailInInput(Actor actor, String email) {
+        actor.attemptsTo(
+                Enter.theValue(email).into(HomePage.SUBSCRIBE_INPUT)
+        );
+    }
+    @And("{actor} clicks on arrow button")
+    public void clickOnArrowButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.SUBSCRIBE_BUTTON)
+        );
+    }
+    @Then("{actor} can see success message: You have been successfully subscribed!")
+    public void checkSubscriptionSuccessMessage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Displayed.of(HomePage.SUCCESS_MESSAGE)).isTrue()
         );
     }
 }

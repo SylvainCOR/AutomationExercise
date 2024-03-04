@@ -27,5 +27,4 @@ Feature: Search and add products
     And products related to the search <productName> are visible
     Examples:
       | actor    | productName |
-      | customer | "jeans"     |
-
+      | Customer | "jeans"     |
