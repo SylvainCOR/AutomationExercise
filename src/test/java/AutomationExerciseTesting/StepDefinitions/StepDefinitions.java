@@ -269,4 +269,29 @@ public class StepDefinitions {
                 VerifyThat.DetailsAreVisible()
         );
     }
+    @When("{actor} enters product name {string} in search input")
+    public void enterProductNameInSearchInput(Actor actor, String productName) {
+        actor.attemptsTo(
+                Enter.theValue(productName).into(ProductsPage.SEARCH_INPUT)
+        );
+    }
+    @And("{actor} clicks on search button")
+    public void customerClicksOnSearchButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.SEARCH_BUTTON)
+        );
+    }
+    @Then("{actor} can see research title: SEARCHED PRODUCTS")
+    public void checkResearchTitleSEARCHEDPRODUCTS(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("SEARCHED PRODUCTS")
+        );
+    }
+    @And("products related to the search {string} are visible")
+    public void productsRelatedToTheSearchAreVisible(String productName) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        actor.attemptsTo(
+                Ensure.that(Text.ofEach(ProductsPage.PRODUCT_NAME).asString()).containsIgnoringCase(productName)
+        );
+    }
 }
