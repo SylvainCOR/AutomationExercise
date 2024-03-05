@@ -32,9 +32,6 @@ public class VerifyThat {
         int secondTotal = secondPrice * secondQuantity;
         int secondTotalExpected = Integer.parseInt(Text.of(ViewCartPage.SECOND_PRODUCT_TOTAL_PRICE).answeredBy(actor).replace("Rs. ", ""));
 
-        System.out.println(firstTotal);
-        System.out.println(firstTotalExpected);
-
         return Task.where(
                 Ensure.that(firstTotal).isEqualTo(firstTotalExpected),
                 Ensure.that(secondTotal).isEqualTo(secondTotalExpected)

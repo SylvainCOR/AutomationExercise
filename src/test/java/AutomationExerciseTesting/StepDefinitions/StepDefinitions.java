@@ -18,8 +18,12 @@ import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Displayed;
+import net.serenitybdd.screenplay.questions.Presence;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
+import net.serenitybdd.screenplay.waits.Wait;
+import net.serenitybdd.screenplay.waits.WaitUntil;
+import net.serenitybdd.screenplay.waits.WaitUntilTargetIsReady;
 
 public class StepDefinitions {
 
@@ -129,6 +133,7 @@ public class StepDefinitions {
     @Then("{actor} can see the home page")
     public void checkHomePageIsVisible(Actor actor) {
         actor.attemptsTo(
+                Wait.until( () -> Visibility.of(HomePage.SLIDER_CAROUSEL).answeredBy(actor)),
                 Ensure.that(Visibility.of(HomePage.SLIDER_CAROUSEL)).isTrue()
         );
     }
@@ -231,6 +236,7 @@ public class StepDefinitions {
     @Then("{actor} can see the test_cases page")
     public void checkTestCasesPage(Actor actor) {
         actor.attemptsTo(
+                Wait.until( () -> Visibility.of(TestCasesPage.TITLE).answeredBy(actor)),
                 Ensure.that(Visibility.of(TestCasesPage.TITLE)).isTrue()
         );
     }
@@ -243,6 +249,7 @@ public class StepDefinitions {
     @Then("{actor} can see products list title: ALL PRODUCTS")
     public void checkProductsListTitle(Actor actor) {
         actor.attemptsTo(
+                Wait.until( () -> Visibility.of(ProductsPage.PRODUCTS_LIST).answeredBy(actor)),
                 Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("ALL PRODUCTS")
         );
     }
@@ -262,6 +269,7 @@ public class StepDefinitions {
     @Then("{actor} is landed to product_details page")
     public void checkProductDetailsPage(Actor actor) {
         actor.attemptsTo(
+                Wait.until( () -> Visibility.of(ProductDetailsPage.PRODUCT_DETAILS).answeredBy(actor)),
                 Ensure.that(Visibility.of(ProductDetailsPage.PRODUCT_DETAILS)).isTrue()
         );
     }
