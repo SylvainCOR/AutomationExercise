@@ -337,6 +337,8 @@ public class StepDefinitions {
         actor.attemptsTo(
                 HoverOverTarget.over(ProductsPage.FIRST_IMG_PRODUCT)
         );
+        actor.remember("firstProductName", Text.of(ProductsPage.FIRST_OVERLAY_NAME).answeredBy(actor));
+        actor.remember("firstProductPrice", Text.of(ProductsPage.FIRST_OVERLAY_PRICE).answeredBy(actor));
     }
     @And("{actor} clicks on first overlay Add to cart button")
     public void clickOnFirstOverlayAddToCartButton(Actor actor) {
@@ -355,6 +357,8 @@ public class StepDefinitions {
         actor.attemptsTo(
                 HoverOverTarget.over(ProductsPage.SECOND_IMG_PRODUCT)
         );
+        actor.remember("secondProductName", Text.of(ProductsPage.SECOND_OVERLAY_NAME).answeredBy(actor));
+        actor.remember("secondProductPrice", Text.of(ProductsPage.SECOND_OVERLAY_PRICE).answeredBy(actor));
     }
     @And("{actor} clicks on second overlay Add to cart button")
     public void clickOnSecondOverlayAddToCartButton(Actor actor) {
@@ -364,11 +368,25 @@ public class StepDefinitions {
     }
     @Then("{actor} can see both products are in the cart")
     public void checkBothProductsAreInTheCart(Actor actor) {
+        String firstProductName = actor.recall("firstProductName");
+        String secondProductName = actor.recall("secondProductName");
+
         actor.attemptsTo(
-                Ensure.that()
+                Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_NAME)).isEqualTo(firstProductName),
+                Ensure.that(Text.of(ViewCartPage.SECOND_PRODUCT_NAME)).isEqualTo(secondProductName)
         );
     }
     @And("{actor} can see details: price, quantity and total price")
     public void checkDetailsPriceQuantityAndTotalPrice(Actor actor) {
+        String firstProductPrice = actor.recall("firstProductPrice");
+        String secondProductPrice = actor.recall("secondProductPrice");
+        int firstPrice = Integer.parseInt(firstProductPrice.replace("Rs. ", ""));
+        int secondPrice = Integer.parseInt(secondProductPrice.replace("Rs. ", ""));
+
+        actor.attemptsTo(
+                Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_PRICE)).isEqualTo(firstProductPrice),
+                Ensure.that(Text.of(ViewCartPage.SECOND_PRODUCT_PRICE)).isEqualTo(secondProductPrice),
+                VerifyThat.TotalPriceIsCorrect(actor, firstPrice, secondPrice)
+        );
     }
 }
