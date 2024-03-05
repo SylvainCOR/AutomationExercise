@@ -17,5 +17,14 @@ public class ProductsPage {
             .locatedBy("//*[@id='submit_search']");
     public static Target PRODUCT_NAME = Target.the("product name")
             .locatedBy("//div[contains(@class,'productinfo')]/p");
-
+    public static Target FIRST_IMG_PRODUCT = Target.the("image of first product")
+            .locatedBy("(//*[@class='single-products']//img)[1]");
+    public static Target FIRST_OVERLAY_ADD_TO_CART = Target.the("add to cart overlay link of first product")
+            .locatedBy("(//*[@class='overlay-content']/a)[1]");
+    public static Target CONTINUE_SHOPPING = Target.the("continue shopping button")
+            .locatedBy("//*[contains(@class,'btn-success')]");
+    public static Target SECOND_IMG_PRODUCT = Target.the("image of first product")
+            .locatedBy("(//*[@class='single-products']//img)[2]");
+    public static Target SECOND_OVERLAY_ADD_TO_CART = Target.the("add to cart overlay link of first product")
+            .locatedBy("(//*[@class='overlay-content']/a)[2]");
 }

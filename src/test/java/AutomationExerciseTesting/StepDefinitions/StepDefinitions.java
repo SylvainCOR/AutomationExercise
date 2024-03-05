@@ -13,6 +13,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.HoverOverTarget;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
@@ -330,5 +331,44 @@ public class StepDefinitions {
         actor.attemptsTo(
                 Click.on(HomePage.CART_BUTTON)
         );
+    }
+    @When("{actor} mouse over first product")
+    public void mouseOverFirstProduct(Actor actor) {
+        actor.attemptsTo(
+                HoverOverTarget.over(ProductsPage.FIRST_IMG_PRODUCT)
+        );
+    }
+    @And("{actor} clicks on first overlay Add to cart button")
+    public void clickOnFirstOverlayAddToCartButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.FIRST_OVERLAY_ADD_TO_CART)
+        );
+    }
+    @And("{actor} clicks on Continue Shopping button")
+    public void clickOnContinueShoppingButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.CONTINUE_SHOPPING)
+        );
+    }
+    @When("{actor} mouse over second product")
+    public void mouseOverSecondProduct(Actor actor) {
+        actor.attemptsTo(
+                HoverOverTarget.over(ProductsPage.SECOND_IMG_PRODUCT)
+        );
+    }
+    @And("{actor} clicks on second overlay Add to cart button")
+    public void clickOnSecondOverlayAddToCartButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.SECOND_OVERLAY_ADD_TO_CART)
+        );
+    }
+    @Then("{actor} can see both products are in the cart")
+    public void checkBothProductsAreInTheCart(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that()
+        );
+    }
+    @And("{actor} can see details: price, quantity and total price")
+    public void checkDetailsPriceQuantityAndTotalPrice(Actor actor) {
     }
 }

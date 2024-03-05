@@ -4,7 +4,7 @@ Feature: Search and add products
   So that I can prepare my purchase
 
   @TestCase8 # Verify All Products and product detail page
-  Scenario Outline: Verify navigation to test cases page
+  Scenario Outline: Verify navigation to all products page then product details page
     Given <actor> launched browser and go to Automation Exercise home page
     When <actor> clicks on Products button
     Then <actor> can see products list title: ALL PRODUCTS
@@ -28,3 +28,21 @@ Feature: Search and add products
     Examples:
       | actor    | productName |
       | Customer | "jeans"     |
+
+  @TestCase12 # Add Products in Cart
+  Scenario Outline: Add first product to the cart, then the second one and verify
+    Given <actor> launched browser and go to Automation Exercise home page
+    When <actor> clicks on Products button
+    Then <actor> can see products list title: ALL PRODUCTS
+    When <actor> mouse over first product
+    And <actor> clicks on first overlay Add to cart button
+    And <actor> clicks on Continue Shopping button
+    And <actor> mouse over second product
+    And <actor> clicks on second overlay Add to cart button
+    And <actor> clicks on Continue Shopping button
+    And <actor> clicks on Cart button
+    Then <actor> can see both products are in the cart
+    And <actor> can see details: price, quantity and total price
+    Examples:
+      | actor    |
+      | Customer |
