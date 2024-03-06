@@ -263,7 +263,7 @@ public class StepDefinitions {
                 Click.on(ProductsPage.FIRST_VIEW_PRODUCT)
         );
     }
-    @Then("{actor} is landed to product_details page")
+    @Then("{actor} can see product_details page")
     public void checkProductDetailsPage(Actor actor) {
         actor.attemptsTo(
                 Wait.until( () -> Visibility.of(ProductDetailsPage.PRODUCT_DETAILS).answeredBy(actor)),
@@ -392,6 +392,40 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_PRICE)).isEqualTo(firstProductPrice),
                 Ensure.that(Text.of(ViewCartPage.SECOND_PRODUCT_PRICE)).isEqualTo(secondProductPrice),
                 VerifyThat.TotalPriceIsCorrect(actor, firstPrice, secondPrice)
+        );
+    }
+    @When("{actor} clicks on last View Product")
+    public void clickOnLastViewProduct(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.LAST_VIEW_PRODUCT)
+        );
+    }
+
+    @When("{actor} increase quantity to {string}")
+    public void increaseQuantity(Actor actor, String quantity) {
+        actor.attemptsTo(
+                Enter.theValue(quantity).into(ProductDetailsPage.QUANTITY)
+        );
+    }
+    @And("{actor} clicks on Add to cart button")
+    public void clickOnAddToCartButton(Actor actor) {
+        actor.remember("productName", Text.of(ProductDetailsPage.PRODUCT_NAME).answeredBy(actor));
+        actor.attemptsTo(
+                Click.on(ProductDetailsPage.ADD_TO_CART)
+        );
+    }
+    @Then("{actor} can see product in the cart")
+    public void checkProductInTheCart(Actor actor) {
+        String productName = actor.recall("productName");
+        actor.attemptsTo(
+                Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_NAME)).isEqualTo(productName)
+        );
+    }
+    @And("the quantity is exactly {string}")
+    public void theQuantityIsExactly(String quantity) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        actor.attemptsTo(
+                Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_QUANTITY)).isEqualTo(quantity)
         );
     }
 }

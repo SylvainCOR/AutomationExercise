@@ -18,4 +18,8 @@ public class ProductDetailsPage {
             .locatedBy("//p[contains(.,'Condition')]");
     public static Target BRAND = Target.the("product brand")
             .locatedBy("//p[contains(.,'Brand')]");
+    public static Target QUANTITY = Target.the("quantity input")
+            .locatedBy("#quantity");
+    public static Target ADD_TO_CART = Target.the("add to cart button")
+            .locatedBy("//button[contains(@class,'cart')]");
 }

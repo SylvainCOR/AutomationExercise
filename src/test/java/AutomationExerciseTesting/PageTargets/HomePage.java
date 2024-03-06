@@ -37,4 +37,6 @@ public class HomePage extends PageObject {
             .locatedBy("//*[@id='success-subscribe']/div");
     public static Target CART_BUTTON = Target.the("cart link")
             .locatedBy("//i[contains(@class,'cart')]/..");
+    public static Target LAST_VIEW_PRODUCT = Target.the("view product link of last product")
+            .locatedBy("(//a[contains(.,'View Product')])[last()]");
 }
