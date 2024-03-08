@@ -27,6 +27,8 @@ public class ProductsPage {
             .locatedBy("(//*[@class='overlay-content']/p)[1]");
     public static Target CONTINUE_SHOPPING = Target.the("continue shopping button")
             .locatedBy("//*[contains(@class,'btn-success')]");
+    public static Target VIEW_CART = Target.the("view cart button")
+            .locatedBy("//*[@id='cartModal']//u");
     public static Target SECOND_IMG_PRODUCT = Target.the("image of first product")
             .locatedBy("(//*[@class='single-products']//img)[2]");
     public static Target SECOND_OVERLAY_ADD_TO_CART = Target.the("add to cart overlay link of first product")

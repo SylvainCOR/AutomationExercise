@@ -38,3 +38,8 @@ Feature: User Registration
     Examples:
       | actor    | name             | email                          | expectedMessage                |
       | LongJohn | "LongJohnSilver" | "longjohnsilver@protonmail.ch" | "Email Address already exist!" |
+
+  @TestCase14
+  Scenario: Register while checkout, confirm order and delete account
+    Given <actor> launched browser and go to Automation Exercise home page
+

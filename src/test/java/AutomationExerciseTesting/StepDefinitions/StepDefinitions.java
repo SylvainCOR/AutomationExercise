@@ -331,10 +331,10 @@ public class StepDefinitions {
                 Ensure.that(Displayed.of(HomePage.SUCCESS_MESSAGE)).isTrue()
         );
     }
-    @When("{actor} clicks on Cart button")
-    public void customerClicksOnCartButton(Actor actor) {
+    @When("{actor} clicks on View Cart button")
+    public void clickOnCartButton(Actor actor) {
         actor.attemptsTo(
-                Click.on(HomePage.CART_BUTTON)
+                Click.on(ProductsPage.VIEW_CART)
         );
     }
     @When("{actor} mouse over first product")

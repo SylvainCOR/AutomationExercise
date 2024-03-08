@@ -39,8 +39,7 @@ Feature: Search and add products
     And <actor> clicks on Continue Shopping button
     And <actor> mouse over second product
     And <actor> clicks on second overlay Add to cart button
-    And <actor> clicks on Continue Shopping button
-    And <actor> clicks on Cart button
+    And <actor> clicks on View Cart button
     Then <actor> can see both products are in the cart
     And <actor> can see details: price, quantity and total price
     Examples:
@@ -54,8 +53,7 @@ Feature: Search and add products
     Then <actor> can see product_details page
     When <actor> increase quantity to <quantity>
     And <actor> clicks on Add to cart button
-    And <actor> clicks on Continue Shopping button
-    And <actor> clicks on Cart button
+    And <actor> clicks on View Cart button
     Then <actor> can see product in the cart
     And the quantity is exactly <quantity>
     Examples:
