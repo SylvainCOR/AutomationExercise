@@ -1,9 +1,6 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.FillTheForm;
-import AutomationExerciseTesting.ActionTasks.HandleDialogBox;
-import AutomationExerciseTesting.ActionTasks.NavigateToThe;
-import AutomationExerciseTesting.ActionTasks.VerifyThat;
+import AutomationExerciseTesting.ActionTasks.*;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -61,25 +58,23 @@ public class StepDefinitions {
         );
     }
     @When("{actor} fills account information details: Title {string}, Name {string}, Email {string}, Password {string}, Date of birth {string}")
-    public void fillAccountInformationDetails(Actor actor, String title, String name, String email, String password, String dateOfBirth) {
+    public void fillAccountInformationDetails(Actor actor, String title, String userName, String email,
+                                                                 String password, String dateOfBirth) {
         actor.attemptsTo(
-                FillTheForm.WithAccountInformation(title, name, email, password, dateOfBirth)
+                FillTheForm.WithAccountInformation(title, userName, email, password, dateOfBirth)
         );
     }
-    @And("{actor} selects newsletter checkbox")
-    public void selectNewsletterCheckbox(Actor actor) {
+    @And("{actor} selects newsletter and special offers checkboxes")
+    public void selectCheckboxes(Actor actor) {
         actor.attemptsTo(
-                Click.on(SignupPage.NEWSLETTER_CHECKBOX)
-        );
-    }
-    @And("{actor} selects special offers checkbox")
-    public void selectSpecialOffersCheckbox(Actor actor) {
-        actor.attemptsTo(
+                Click.on(SignupPage.NEWSLETTER_CHECKBOX),
                 Click.on(SignupPage.SPECIAL_OFFERS_CHECKBOX)
         );
     }
-    @And("{actor} fills address information details: First name {string}, Last name {string}, Company {string}, Address {string}, Address2 {string}, Country {string}, State {string}, City {string}, Zipcode {string}, Mobile Number {string}")
-    public void fillAddressInformationDetails(Actor actor, String firstName, String lastName, String company, String address, String address2, String country, String state, String city, String zipcode, String number) {
+    @And("{actor} fills address information details: First name {string}, Last name {string}, Company {string}, Address {string}, " +
+            "Address2 {string}, Country {string}, State {string}, City {string}, Zipcode {string}, Mobile Number {string}")
+    public void fillAddressInformationDetails(Actor actor, String firstName, String lastName, String company, String address, String address2,
+                                                     String country, String state, String city, String zipcode, String number) {
         actor.attemptsTo(
                 FillTheForm.WithAddressInformation(firstName, lastName,
                         company, address, address2, country, state, city, zipcode, number)
@@ -332,7 +327,7 @@ public class StepDefinitions {
         );
     }
     @When("{actor} clicks on View Cart button")
-    public void clickOnCartButton(Actor actor) {
+    public void clickOnViewCartButton(Actor actor) {
         actor.attemptsTo(
                 Click.on(ProductsPage.VIEW_CART)
         );
@@ -426,6 +421,62 @@ public class StepDefinitions {
         Actor actor = OnStage.theActorInTheSpotlight();
         actor.attemptsTo(
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_QUANTITY)).isEqualTo(quantity)
+        );
+    }
+    @When("{actor} adds to cart the first three {int} products")
+    public void addProductsToCart(Actor actor, Integer number) {
+        actor.attemptsTo(
+                AddToCart.FirstThreeProducts(number)
+        );
+    }
+    @And("{actor} clicks on Cart button")
+    public void clickOnCartButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.CART_BUTTON)
+        );
+    }
+    @Then("{actor} can see the view_cart page")
+    public void checkView_cartPageVisibility(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ViewCartPage.PROCEED_TO_CHECKOUT)).isTrue()
+        );
+    }
+    @When("{actor} clicks on Proceed To Checkout button")
+    public void clickOnProceedToCheckoutButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ViewCartPage.PROCEED_TO_CHECKOUT)
+        );
+    }
+    @And("{actor} clicks on Register Login link")
+    public void clickOnRegisterLoginLink(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ViewCartPage.REGISTER_LOGIN)
+        );
+    }
+    @And("{actor} fills details to SignUp: {string} {string}")
+    public void fillDetailsToSignUp(Actor actor, String name, String email) {
+        actor.attemptsTo(
+                FillTheForm.ToSignUp(name, email),
+                Click.on(LoginPage.SIGN_UP_BUTTON)
+        );
+    }
+    @And("{actor} fills details to Create Account: {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void fillDetailsToCreateAccount(Actor actor, String title, String userName, String email, String password, String dateOfBirth,
+                                           String firstName, String lastName, String company, String address, String address2,
+                                           String country, String state, String city, String zipcode, String number) {
+        actor.attemptsTo(
+                FillTheForm.WithAccountInformation(title, userName, email, password, dateOfBirth),
+                Click.on(SignupPage.NEWSLETTER_CHECKBOX),
+                Click.on(SignupPage.SPECIAL_OFFERS_CHECKBOX),
+                FillTheForm.WithAddressInformation(firstName, lastName,
+                        company, address, address2, country, state, city, zipcode, number),
+                Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
+        );
+    }
+    @Then("{actor} can see Address Details and Review Your Order titles")
+    public void checkAddressDetailsAndReviewYourOrderTitles(Actor actor) {
+        actor.attemptsTo(
+
         );
     }
 }

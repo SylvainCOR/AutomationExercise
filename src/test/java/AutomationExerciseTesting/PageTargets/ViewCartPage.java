@@ -20,4 +20,8 @@ public class ViewCartPage {
             .locatedBy("(//*[@class='cart_total']/p)[1]");
     public static Target SECOND_PRODUCT_TOTAL_PRICE = Target.the("second total product price in the cart")
             .locatedBy("(//*[@class='cart_total']/p)[2]");
+    public static Target PROCEED_TO_CHECKOUT = Target.the("checkout button")
+            .locatedBy("//*[contains(@class,'check_out')]");
+    public static Target REGISTER_LOGIN = Target.the("register / login link")
+            .locatedBy("//*[@id='checkoutModal']//u");
 }

@@ -13,7 +13,6 @@ public class LoginPage {
             .locatedBy("//div[@class='signup-form']//button");
     public static Target SIGN_UP_ERROR_MESSAGE = Target.the("signup error message")
             .locatedBy("//*[@class='signup-form']//p");
-
     public static Target LOG_IN_TITLE = Target.the("login form title")
             .locatedBy("//*[@class='login-form']/h2");
     public static Target LOG_IN_EMAIL_FIELD = Target.the("login form email field")
