@@ -2,6 +2,7 @@ package AutomationExerciseTesting.ActionTasks;
 
 import AutomationExerciseTesting.PageTargets.ContactUsPage;
 import AutomationExerciseTesting.PageTargets.LoginPage;
+import AutomationExerciseTesting.PageTargets.PaymentPage;
 import AutomationExerciseTesting.PageTargets.SignupPage;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -10,6 +11,10 @@ import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Value;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FillTheForm {
 
@@ -57,5 +62,20 @@ public class FillTheForm {
                 Enter.theValue(subject).into(ContactUsPage.SUBJECT_FIELD),
                 Enter.theValue(message).into(ContactUsPage.MESSAGE_FIELD)
                 );
+    }
+
+    public static Performable WithPaymentDetails(String lastName, String cardNumber, String cvc, String expiration) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy");
+        Date date = dateFormat.parse(expiration);
+        String expirationMonth = new SimpleDateFormat("MM").format(date);
+        String expirationYear = new SimpleDateFormat("2yyy").format(date);
+
+        return Task.where("{0} fills details to confirm payment",
+                Enter.theValue(lastName).into(PaymentPage.NAME_ON_CARD),
+                Enter.theValue(cardNumber).into(PaymentPage.CARD_NUMBER),
+                Enter.theValue(cvc).into(PaymentPage.CVC),
+                Enter.theValue(expirationMonth).into(PaymentPage.MONTH_OF_EXPIRATION),
+                Enter.theValue(expirationYear).into(PaymentPage.YEAR_OF_EXPIRATION)
+        );
     }
 }

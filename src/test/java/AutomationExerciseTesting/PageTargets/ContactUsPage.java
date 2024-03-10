@@ -18,8 +18,6 @@ public class ContactUsPage {
             .locatedBy("//*[@name='upload_file']");
     public static Target SUBMIT_BUTTON = Target.the("contact form submit button")
             .locatedBy("//*[@name='submit']");
-    public static Target OK_BUTTON = Target.the("confirmation OK button")
-            .locatedBy("#ok");
     public static Target SUCCESS_MESSAGE = Target.the("alert success message")
             .locatedBy("//div[@class='contact-form']/div[contains(@class,'alert-success')]");
     public static Target HOME_BUTTON = Target.the("home button")

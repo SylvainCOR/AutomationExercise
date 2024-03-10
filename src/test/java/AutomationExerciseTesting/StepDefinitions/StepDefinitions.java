@@ -19,6 +19,8 @@ import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.Wait;
 
+import java.text.ParseException;
+
 public class StepDefinitions {
 
     @Given("{actor} launched browser and go to Automation Exercise home page")
@@ -81,7 +83,7 @@ public class StepDefinitions {
         );
     }
     @And("{actor} clicks on Create Account button")
-    public void clickCreateAccountButton(Actor actor) {
+    public void clickOnCreateAccountButton(Actor actor) {
         actor.attemptsTo(
                 Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
         );
@@ -395,7 +397,6 @@ public class StepDefinitions {
                 Click.on(HomePage.LAST_VIEW_PRODUCT)
         );
     }
-
     @When("{actor} increase quantity to {string}")
     public void increaseQuantity(Actor actor, String quantity) {
         actor.attemptsTo(
@@ -454,29 +455,61 @@ public class StepDefinitions {
         );
     }
     @And("{actor} fills details to SignUp: {string} {string}")
-    public void fillDetailsToSignUp(Actor actor, String name, String email) {
-        actor.attemptsTo(
-                FillTheForm.ToSignUp(name, email),
-                Click.on(LoginPage.SIGN_UP_BUTTON)
-        );
+    public void fillDetailsToSignUp(Actor actor, String userName, String email) {
+        enterNameAndEmail(actor, userName, email);
+        clickOnSignupButton(actor);
     }
     @And("{actor} fills details to Create Account: {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string}")
     public void fillDetailsToCreateAccount(Actor actor, String title, String userName, String email, String password, String dateOfBirth,
                                            String firstName, String lastName, String company, String address, String address2,
                                            String country, String state, String city, String zipcode, String number) {
-        actor.attemptsTo(
-                FillTheForm.WithAccountInformation(title, userName, email, password, dateOfBirth),
-                Click.on(SignupPage.NEWSLETTER_CHECKBOX),
-                Click.on(SignupPage.SPECIAL_OFFERS_CHECKBOX),
-                FillTheForm.WithAddressInformation(firstName, lastName,
-                        company, address, address2, country, state, city, zipcode, number),
-                Click.on(SignupPage.CREATE_ACCOUNT_BUTTON)
-        );
+        fillAccountInformationDetails(actor, title, userName, email, password, dateOfBirth);
+        selectCheckboxes(actor);
+        fillAddressInformationDetails(actor, firstName, lastName,
+                company, address, address2, country, state, city, zipcode, number);
+        clickOnCreateAccountButton(actor);
     }
     @Then("{actor} can see Address Details and Review Your Order titles")
     public void checkAddressDetailsAndReviewYourOrderTitles(Actor actor) {
         actor.attemptsTo(
-
+                Ensure.that(Text.of(CheckoutPage.ADDRESS_DETAILS)).isEqualTo("Address Details"),
+                Ensure.that(Text.of(CheckoutPage.REVIEW_YOUR_ORDER)).isEqualTo("Review Your Order")
+        );
+    }
+    @When("{actor} enters {string} in comment text area")
+    public void enterDescriptionInCommentTextArea(Actor actor, String description) {
+        actor.attemptsTo(
+                Enter.theValue(description).into(CheckoutPage.TEXT_AREA)
+        );
+    }
+    @And("{actor} clicks on Place Order button")
+    public void clickOnPlaceOrderButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(CheckoutPage.PLACE_ORDER)
+        );
+    }
+    @Then("{actor} can see Payment title")
+    public void checkPaymentTitle(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(PaymentPage.PAYMENT_TITLE)).isTrue()
+        );
+    }
+    @When("{actor} enters payment details: Name on Card {string}, Card Number {string}, CVC {string}, Expiration date {string}")
+    public void fillPaymentDetails(Actor actor, String lastName, String cardNumber, String cvc, String expiration) throws ParseException {
+        actor.attemptsTo(
+                FillTheForm.WithPaymentDetails(lastName, cardNumber, cvc, expiration)
+        );
+    }
+    @And("{actor} clicks on Pay and Confirm Order button")
+    public void clickOnPayAndConfirmOrderButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(PaymentPage.PAY_AND_CONFIRM_ORDER)
+        );
+    }
+    @Then("{actor} can see success message: Your order has been placed successfully!")
+    public void checkSuccessMessage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(PaymentPage.SUCCESSFUL_MESSAGE)).isEqualTo("Your order has been placed successfully!")
         );
     }
 }

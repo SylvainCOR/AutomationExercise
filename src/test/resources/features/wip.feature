@@ -19,7 +19,7 @@ Feature: User Registration
     When John enters "Thank you" in comment text area
     And John clicks on Place Order button
     Then John can see Payment title
-    When John enters payment details: Name on Card "", Card Number "", CVC "", Expiration date ""
+    When John enters payment details: Name on Card "Flint", Card Number "4444444444444111", CVC "520", Expiration date "07/30"
     And John clicks on Pay and Confirm Order button
     Then John can see success message: Your order has been placed successfully!
     When John clicks on Delete Account button
