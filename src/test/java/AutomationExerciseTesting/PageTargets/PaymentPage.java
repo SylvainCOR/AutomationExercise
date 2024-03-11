@@ -18,7 +18,4 @@ public class PaymentPage {
             .locatedBy("//*[@name='expiry_year']");
     public static Target PAY_AND_CONFIRM_ORDER = Target.the("pay and order confirm button")
             .locatedBy("#submit");
-    public static Target SUCCESSFUL_MESSAGE = Target.the("successful message alert")
-            .locatedBy("//*[@id='payment-form']//*[contains(@class,'success')]");
-
 }

@@ -1,7 +1,7 @@
 Feature: Login options
   As a user
   I want to log in and log out
-  So that I can visit website and quit
+  So that I can visit website or place order
 
   @TestCase2 # Login User with correct email and password
   Scenario Outline: Login with existing account
@@ -40,3 +40,4 @@ Feature: Login options
     Examples:
       | actor     | email                          | password     | username         |
       | Long John | "longjohnsilver@protonmail.ch" | "hispaniola" | "LongJohnSilver" |
+

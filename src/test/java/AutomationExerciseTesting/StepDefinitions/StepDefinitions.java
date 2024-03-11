@@ -8,10 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.HoverOverTarget;
-import net.serenitybdd.screenplay.actions.Scroll;
+import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Displayed;
@@ -103,7 +100,7 @@ public class StepDefinitions {
     @Then("{actor} can see Logged in as {string} on home page")
     public void checkLoggedIn(Actor actor, String username) {
         actor.attemptsTo(
-                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualToIgnoringCase("Logged in as " + username)
+                Ensure.that(Text.of(HomePage.LOGGED_IN)).isEqualTo("Logged in as " + username)
         );
     }
     @When("{actor} clicks on Delete Account button")
@@ -424,7 +421,7 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_QUANTITY)).isEqualTo(quantity)
         );
     }
-    @When("{actor} adds to cart the first three {int} products")
+    @When("{actor} adds to cart the first {int} products")
     public void addProductsToCart(Actor actor, Integer number) {
         actor.attemptsTo(
                 AddToCart.FirstThreeProducts(number)
@@ -495,7 +492,7 @@ public class StepDefinitions {
         );
     }
     @When("{actor} enters payment details: Name on Card {string}, Card Number {string}, CVC {string}, Expiration date {string}")
-    public void fillPaymentDetails(Actor actor, String lastName, String cardNumber, String cvc, String expiration) throws ParseException {
+    public void fillPaymentDetails(Actor actor, String lastName, String cardNumber, String cvc, String expiration) {
         actor.attemptsTo(
                 FillTheForm.WithPaymentDetails(lastName, cardNumber, cvc, expiration)
         );
@@ -506,10 +503,10 @@ public class StepDefinitions {
                 Click.on(PaymentPage.PAY_AND_CONFIRM_ORDER)
         );
     }
-    @Then("{actor} can see success message: Your order has been placed successfully!")
+    @Then("{actor} can see success message: Congratulations! Your order has been confirmed!")
     public void checkSuccessMessage(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Text.of(PaymentPage.SUCCESSFUL_MESSAGE)).isEqualTo("Your order has been placed successfully!")
+                Ensure.that(Text.of(PaymentDonePage.CONGRATS_MESSAGE)).isEqualTo("Congratulations! Your order has been confirmed!")
         );
     }
 }
