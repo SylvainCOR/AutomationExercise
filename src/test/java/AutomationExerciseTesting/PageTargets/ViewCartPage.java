@@ -4,10 +4,12 @@ import net.serenitybdd.screenplay.targets.Target;
 
 public class ViewCartPage {
 
+    public static Target PRODUCT_LIST = Target.the("list of products in the cart")
+            .locatedBy("//*[@class='cart_description']/h4");
     public static Target FIRST_PRODUCT_NAME = Target.the("first product in the cart")
-            .locatedBy("(//*[@class='cart_product']/..//h4)[1]");
+            .locatedBy("(//*[@class='cart_description']/h4)[1]");
     public static Target SECOND_PRODUCT_NAME = Target.the("second product in the cart")
-            .locatedBy("(//*[@class='cart_product']/..//h4)[2]");
+            .locatedBy("(//*[@class='cart_description']/h4)[2]");
     public static Target FIRST_PRODUCT_PRICE = Target.the("first product price in the cart")
             .locatedBy("(//*[@class='cart_price']/p)[1]");
     public static Target SECOND_PRODUCT_PRICE = Target.the("second product price in the cart")
@@ -20,6 +22,8 @@ public class ViewCartPage {
             .locatedBy("(//*[@class='cart_total']/p)[1]");
     public static Target SECOND_PRODUCT_TOTAL_PRICE = Target.the("second total product price in the cart")
             .locatedBy("(//*[@class='cart_total']/p)[2]");
+    public static Target SECOND_PRODUCT_DELETE_BUTTON = Target.the("second X button to delete product")
+            .locatedBy("(//*[@class='cart_delete']/a)[2]");
     public static Target PROCEED_TO_CHECKOUT = Target.the("checkout button")
             .locatedBy("//*[contains(@class,'check_out')]");
     public static Target REGISTER_LOGIN = Target.the("register / login link")

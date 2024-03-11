@@ -516,4 +516,19 @@ public class StepDefinitions {
         enterEmailAndPassword(actor, email, password);
         clickOnLoginButton(actor);
     }
+    @When("{actor} clicks on X button of second product")
+    public void clickOnXButtonOfSecondProduct(Actor actor) {
+        actor.remember("secondProductName", Text.of(ViewCartPage.SECOND_PRODUCT_NAME).answeredBy(actor));
+        actor.attemptsTo(
+                Click.on(ViewCartPage.SECOND_PRODUCT_DELETE_BUTTON)
+        );
+    }
+    @Then("{actor} cannot see second product in the cart")
+    public void actorCannotSeeSecondProductInTheCart(Actor actor) {
+        String secondProductName = actor.recall("secondProductName");
+        String productList = Text.ofEach(ViewCartPage.PRODUCT_LIST).answeredBy(actor).toString();
+        actor.attemptsTo(
+                Ensure.that(productList).doesNotContain(secondProductName)
+        );
+    }
 }
