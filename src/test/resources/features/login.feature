@@ -41,3 +41,25 @@ Feature: Login options
       | actor     | email                          | password     | username         |
       | Long John | "longjohnsilver@protonmail.ch" | "hispaniola" | "LongJohnSilver" |
 
+  @TestCase16 # Place Order: Login before Checkout
+  Scenario Outline: Login before checkout, confirm order and logout
+    Given <actor> launched browser and go to Automation Exercise home page
+    When <actor> clicks on Signup Login button
+    And <actor> fills details to Login: <email> <password>
+    Then <actor> can see Logged in as <userName> on home page
+    When <actor> adds to cart the first <numberOfProducts> products
+    And <actor> clicks on Cart button
+    Then <actor> can see the view_cart page
+    When <actor> clicks on Proceed To Checkout button
+    Then <actor> can see Address Details and Review Your Order titles
+    When <actor> enters <description> in comment text area
+    And <actor> clicks on Place Order button
+    Then <actor> can see Payment title
+    When <actor> enters payment details: Name on Card <lastName>, Card Number <cardNumber>, CVC <cvc>, Expiration date <expiration>
+    And <actor> clicks on Pay and Confirm Order button
+    Then <actor> can see success message: Congratulations! Your order has been confirmed!
+    When <actor> clicks on Logout button
+    Then <actor> can see the login page
+    Examples:
+      | actor     | numberOfProducts | userName         | email                          | password     | lastName | description | cardNumber         | cvc   | expiration |
+      | Long John | 2                | "LongJohnSilver" | "longjohnsilver@protonmail.ch" | "hispaniola" | "Silver" | "Thank you" | "4444444444444111" | "520" | "07/30"    |

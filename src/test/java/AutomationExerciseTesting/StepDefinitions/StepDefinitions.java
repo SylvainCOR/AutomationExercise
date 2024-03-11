@@ -8,15 +8,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.*;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.HoverOverTarget;
+import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Displayed;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.Wait;
-
-import java.text.ParseException;
 
 public class StepDefinitions {
 
@@ -508,5 +509,11 @@ public class StepDefinitions {
         actor.attemptsTo(
                 Ensure.that(Text.of(PaymentDonePage.CONGRATS_MESSAGE)).isEqualTo("Congratulations! Your order has been confirmed!")
         );
+    }
+    @And("{actor} fills details to Login: {string} {string}")
+    public void fillDetailsToLogin(Actor actor, String email, String password) {
+        checkLoginTitle(actor);
+        enterEmailAndPassword(actor, email, password);
+        clickOnLoginButton(actor);
     }
 }
