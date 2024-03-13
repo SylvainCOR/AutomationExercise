@@ -18,6 +18,10 @@ import net.serenitybdd.screenplay.questions.Displayed;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.Wait;
+import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.openqa.selenium.By;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
 public class StepDefinitions {
 
@@ -518,17 +522,16 @@ public class StepDefinitions {
     }
     @When("{actor} clicks on X button of second product")
     public void clickOnXButtonOfSecondProduct(Actor actor) {
-        actor.remember("secondProductName", Text.of(ViewCartPage.SECOND_PRODUCT_NAME).answeredBy(actor));
+        actor.remember("removedProductName", Text.of(ViewCartPage.SECOND_PRODUCT_NAME).answeredBy(actor));
         actor.attemptsTo(
                 Click.on(ViewCartPage.SECOND_PRODUCT_DELETE_BUTTON)
         );
     }
     @Then("{actor} cannot see second product in the cart")
     public void actorCannotSeeSecondProductInTheCart(Actor actor) {
-        String secondProductName = actor.recall("secondProductName");
-        String productList = Text.ofEach(ViewCartPage.PRODUCT_LIST).answeredBy(actor).toString();
+        String SearchRemovedProduct = "//*[contains(.,'" + actor.recall("removedProductName") + "')]";
         actor.attemptsTo(
-                Ensure.that(productList).doesNotContain(secondProductName)
+                WaitUntil.the(invisibilityOfElementLocated(By.xpath(SearchRemovedProduct)))
         );
     }
 }
