@@ -43,14 +43,10 @@ public class HomePage extends PageObject {
             .locatedBy("(//div[contains(@class,'info')]/a)");
     public static Target CONTINUE_SHOPPING = Target.the("continue shopping button")
             .locatedBy("//*[@id='cartModal']//button");
-    public static Target CATEGORY_PRODUCTS = Target.the("categories on left side bar")
+    public static Target CATEGORY_TITLE = Target.the("categories on left side bar")
             .locatedBy("#accordian");
     public static Target WOMEN_CATEGORY = Target.the("women category link")
             .locatedBy("//*[@href='#Women']");
     public static Target DRESS_SUBCATEGORY = Target.the("dress sub-category link")
-            .locatedBy("//*[@id='Women']//a[.='Dress ']");
-    public static Target MEN_CATEGORY = Target.the("men category link")
-            .locatedBy("//*[@href='#Men']");
-    public static Target JEANS_SUBCATEGORY = Target.the("jeans sub-category link")
-            .locatedBy("//*[@id='Men']//a[.='Jeans ']");
+            .locatedBy("//*[@id='Women']//a[text()='Dress ']");
 }

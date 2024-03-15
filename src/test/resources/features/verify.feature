@@ -4,11 +4,7 @@ Feature: Access to exercise page
   So that I can practise with automation
 
   @TestCase7 # Verify Test Cases Page
-  Scenario Outline: Verify navigation to test cases page
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> clicks on Test Cases button
-    Then <actor> can see the test_cases page
-    Examples:
-      | actor  |
-      | Tester |
-
+  Scenario: Navigation to test cases page
+    Given Tester launched browser and go to Automation Exercise home page
+    When Tester clicks on Test Cases button
+    Then Tester can see the test_cases page

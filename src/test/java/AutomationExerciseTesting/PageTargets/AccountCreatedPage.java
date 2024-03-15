@@ -8,6 +8,4 @@ public class AccountCreatedPage {
             .locatedBy("//h2/b");
     public static Target CONTINUE_BUTTON = Target.the("continue button")
             .locatedBy("//div[@class='pull-right']/a");
-
-
 }

@@ -537,7 +537,7 @@ public class StepDefinitions {
     @And("{actor} can see categories on left side bar")
     public void checkCategoriesVisibleOnLeftSideBar(Actor actor) {
         actor.attemptsTo(
-                Ensure.that(Visibility.of(HomePage.CATEGORY_PRODUCTS)).isTrue()
+                Ensure.that(Visibility.of(HomePage.CATEGORY_TITLE)).isTrue()
         );
     }
     @When("{actor} clicks on Women category")
@@ -549,9 +549,7 @@ public class StepDefinitions {
     }
     @And("{actor} clicks on Dress sub-category")
     public void clickOnDressSubCategory(Actor actor) {
-        //String xpath = HomePage.DRESS_SUBCATEGORY.getCssOrXPathSelector();
         actor.attemptsTo(
-                //WaitUntil.the(visibilityOfAllElementsLocatedBy(By.xpath(xpath))),
                 Click.on(HomePage.DRESS_SUBCATEGORY)
         );
     }
@@ -564,13 +562,31 @@ public class StepDefinitions {
     @When("{actor} clicks on Men category")
     public void clickOnMenCategory(Actor actor) {
         actor.attemptsTo(
-                Click.on(HomePage.MEN_CATEGORY)
+                Click.on(CategoryProductsPage.MEN_CATEGORY)
         );
     }
     @And("{actor} clicks on Jeans sub-category")
     public void clickOnJeansSubCategory(Actor actor) {
         actor.attemptsTo(
-                Click.on(HomePage.JEANS_SUBCATEGORY)
+                Click.on(CategoryProductsPage.JEANS_SUBCATEGORY)
+        );
+    }
+    @And("{actor} can see brands on left side bar")
+    public void checkBrandsVisibleOnLeftSideBar(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ProductsPage.BRANDS_TITLE)).isTrue()
+        );
+    }
+    @When("{actor} clicks on H&M brand")
+    public void clickOnHMBrand(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.HM_BRAND)
+        );
+    }
+    @When("{actor} clicks on BIBA brand")
+    public void clickOnBibaBrand(Actor actor) {
+        actor.attemptsTo(
+                Click.on(BrandProductsPage.BIBA_BRAND)
         );
     }
 }

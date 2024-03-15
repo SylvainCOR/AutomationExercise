@@ -37,4 +37,8 @@ public class ProductsPage {
             .locatedBy("(//*[@class='overlay-content']/h2)[2]");
     public static Target SECOND_OVERLAY_NAME = Target.the("product name overlay link of second product")
             .locatedBy("(//*[@class='overlay-content']/p)[2]");
+    public static Target BRANDS_TITLE = Target.the("brands products title in left side bar")
+            .locatedBy("//*[@class='brands_products']/h2");
+    public static Target HM_BRAND = Target.the("H&M brand in left side bar")
+            .locatedBy("//a[text()='H&M']");
 }

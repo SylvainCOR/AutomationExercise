@@ -61,28 +61,32 @@ Feature: Search and add products
       | Customer | "4"      |
 
   @TestCase17 # Remove Products From Cart
-  Scenario Outline:
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> adds to cart the first <numberOfProducts> products
-    And <actor> clicks on Cart button
-    Then <actor> can see the view_cart page
-    When <actor> clicks on X button of second product
-    Then <actor> cannot see second product in the cart
-    Examples:
-      | actor    | numberOfProducts |
-      | Customer | 5                |
+  Scenario:
+    Given Customer launched browser and go to Automation Exercise home page
+    When Customer adds to cart the first 5 products
+    And Customer clicks on Cart button
+    Then Customer can see the view_cart page
+    When Customer clicks on X button of second product
+    Then Customer cannot see second product in the cart
+
 
   @TestCase18 # View Category Products
-  Scenario Outline: Switch between women and men category products
-    Given <actor> launched browser and go to Automation Exercise home page
-    And <actor> can see categories on left side bar
-    When <actor> clicks on Women category
-    And <actor> clicks on Dress sub-category
-    Then <actor> can see <title1> title
-    When <actor> clicks on Men category
-    And <actor> clicks on Jeans sub-category
-    Then <actor> can see <title2> title
-    Examples:
-      | actor | title1                   | title2                 |
-      | User  | "WOMEN - DRESS PRODUCTS" | "MEN - JEANS PRODUCTS" |
+  Scenario: Switch between women and men category products
+    Given Customer launched browser and go to Automation Exercise home page
+    And Customer can see categories on left side bar
+    When Customer clicks on Women category
+    And Customer clicks on Dress sub-category
+    Then Customer can see "WOMEN - DRESS PRODUCTS" title
+    When Customer clicks on Men category
+    And Customer clicks on Jeans sub-category
+    Then Customer can see "MEN - JEANS PRODUCTS" title
 
+  @TestCase19 # View & Cart Brand Products
+  Scenario: Switch between brand products pages
+    Given Customer launched browser and go to Automation Exercise home page
+    When Customer clicks on Products button
+    Then Customer can see brands on left side bar
+    When Customer clicks on H&M brand
+    Then Customer can see "BRAND - H&M PRODUCTS" title
+    When Customer clicks on BIBA brand
+    Then Customer can see "BRAND - BIBA PRODUCTS" title
