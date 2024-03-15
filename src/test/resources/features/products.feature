@@ -71,3 +71,18 @@ Feature: Search and add products
     Examples:
       | actor    | numberOfProducts |
       | Customer | 5                |
+
+  @TestCase18 # View Category Products
+  Scenario Outline: Switch between women and men category products
+    Given <actor> launched browser and go to Automation Exercise home page
+    And <actor> can see categories on left side bar
+    When <actor> clicks on Women category
+    And <actor> clicks on Dress sub-category
+    Then <actor> can see <title1> title
+    When <actor> clicks on Men category
+    And <actor> clicks on Jeans sub-category
+    Then <actor> can see <title2> title
+    Examples:
+      | actor | title1                   | title2                 |
+      | User  | "WOMEN - DRESS PRODUCTS" | "MEN - JEANS PRODUCTS" |
+

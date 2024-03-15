@@ -528,10 +528,49 @@ public class StepDefinitions {
         );
     }
     @Then("{actor} cannot see second product in the cart")
-    public void actorCannotSeeSecondProductInTheCart(Actor actor) {
+    public void checkSecondProductNotInCart(Actor actor) {
         String SearchRemovedProduct = "//*[contains(.,'" + actor.recall("removedProductName") + "')]";
         actor.attemptsTo(
                 WaitUntil.the(invisibilityOfElementLocated(By.xpath(SearchRemovedProduct)))
+        );
+    }
+    @And("{actor} can see categories on left side bar")
+    public void checkCategoriesVisibleOnLeftSideBar(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(HomePage.CATEGORY_PRODUCTS)).isTrue()
+        );
+    }
+    @When("{actor} clicks on Women category")
+    public void clickOnWomenCategory(Actor actor) {
+        actor.attemptsTo(
+                Scroll.to(HomePage.WOMEN_CATEGORY).andAlignToTop(),
+                Click.on(HomePage.WOMEN_CATEGORY)
+        );
+    }
+    @And("{actor} clicks on Dress sub-category")
+    public void clickOnDressSubCategory(Actor actor) {
+        //String xpath = HomePage.DRESS_SUBCATEGORY.getCssOrXPathSelector();
+        actor.attemptsTo(
+                //WaitUntil.the(visibilityOfAllElementsLocatedBy(By.xpath(xpath))),
+                Click.on(HomePage.DRESS_SUBCATEGORY)
+        );
+    }
+    @Then("{actor} can see {string} title")
+    public void checkCategoryTitle(Actor actor, String title) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(CategoryProductsPage.SELECTED_CATEGORY_TITLE)).isEqualTo(title)
+        );
+    }
+    @When("{actor} clicks on Men category")
+    public void clickOnMenCategory(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.MEN_CATEGORY)
+        );
+    }
+    @And("{actor} clicks on Jeans sub-category")
+    public void clickOnJeansSubCategory(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.JEANS_SUBCATEGORY)
         );
     }
 }
