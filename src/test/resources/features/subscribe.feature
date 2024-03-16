@@ -4,26 +4,20 @@ Feature: Subscription
   So that I can stay updated
 
   @TestCase10 # Verify Subscription in home page
-  Scenario Outline: Verify subscription in home page
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> scrolls down to footer
-    Then <actor> can see title: SUBSCRIPTION
-    When <actor> enters email <email> in input
-    And <actor> clicks on arrow button
-    Then <actor> can see success message: You have been successfully subscribed!
-    Examples:
-      | actor    | email                     |
-      | Customer | "johnflint@protonmail.ch" |
+  Scenario: Verify subscription in home page
+    Given Customer launched browser and go to Automation Exercise home page
+    When Customer scrolls down to footer
+    Then Customer can see title: SUBSCRIPTION
+    When Customer enters email "johnflint@protonmail.ch" in input
+    And Customer clicks on arrow button
+    Then Customer can see success message: You have been successfully subscribed!
 
   @TestCase11 # Verify Subscription in Cart page
-  Scenario Outline: Verify subscription in Cart page
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> clicks on Cart button
-    And <actor> scrolls down to footer
-    Then <actor> can see title: SUBSCRIPTION
-    When <actor> enters email <email> in input
-    And <actor> clicks on arrow button
-    Then <actor> can see success message: You have been successfully subscribed!
-    Examples:
-      | actor    | email                     |
-      | Customer | "johnflint@protonmail.ch" |
+  Scenario: Verify subscription in Cart page
+    Given Customer launched browser and go to Automation Exercise home page
+    When Customer clicks on Cart button
+    And Customer scrolls down to footer
+    Then Customer can see title: SUBSCRIPTION
+    When Customer enters email "johnflint@protonmail.ch" in input
+    And Customer clicks on arrow button
+    Then Customer can see success message: You have been successfully subscribed!

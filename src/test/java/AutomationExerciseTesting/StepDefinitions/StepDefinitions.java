@@ -553,7 +553,7 @@ public class StepDefinitions {
                 Click.on(HomePage.DRESS_SUBCATEGORY)
         );
     }
-    @Then("{actor} can see {string} title")
+    @Then("{actor} can see {string} category title")
     public void checkCategoryTitle(Actor actor, String title) {
         actor.attemptsTo(
                 Ensure.that(Text.of(CategoryProductsPage.SELECTED_CATEGORY_TITLE)).isEqualTo(title)
@@ -581,6 +581,12 @@ public class StepDefinitions {
     public void clickOnHMBrand(Actor actor) {
         actor.attemptsTo(
                 Click.on(ProductsPage.HM_BRAND)
+        );
+    }
+    @Then("{actor} can see {string} brand title")
+    public void checkBrandTitle(Actor actor, String title) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(BrandProductsPage.SELECTED_BRAND_TITLE)).isEqualTo(title)
         );
     }
     @When("{actor} clicks on BIBA brand")

@@ -4,94 +4,82 @@ Feature: User Registration
   So that I can sign in to the website or place order
 
   @TestCase1 # Register user
-  Scenario Outline: Register User to create an account and then delete the account
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> clicks on Signup Login button
-    Then <actor> can see: New User Signup!
-    When <actor> enters name <userName> and email <email>
-    And <actor> clicks on Signup button
-    Then <actor> can see: ENTER ACCOUNT INFORMATION
-    When <actor> fills account information details: Title <title>, Name <userName>, Email <email>, Password <password>, Date of birth <dateOfBirth>
-    And <actor> selects newsletter and special offers checkboxes
-    And <actor> fills address information details: First name <firstName>, Last name <lastName>, Company <company>, Address <address>, Address2 <address2>, Country <country>, State <state>, City <city>, Zipcode <zipcode>, Mobile Number <number>
-    And <actor> clicks on Create Account button
-    Then <actor> can see: ACCOUNT CREATED!
-    When <actor> clicks on account_created page Continue button
-    Then <actor> can see Logged in as <userName> on home page
-    When <actor> clicks on Delete Account button
-    Then <actor> can see: ACCOUNT DELETED!
-    When <actor> clicks on delete_account page Continue button
-    Then <actor> can see the home page
-    Examples:
-      | actor | userName       | email                     | title | password | dateOfBirth  | firstName | lastName | company          | address        | address2 | country  | state   | city         | zipcode  | number         |
-      | John  | "captainFlint" | "johnflint@protonmail.ch" | "Mr"  | "walrus" | "07/07/1924" | "John"    | "Flint"  | "New Providence" | "6 Lewes Blvd" | ""       | "Canada" | "Yukon" | "Whitehorse" | "Y1A3J4" | "+18675555555" |
+  Scenario: Register User to create an account and then delete the account
+    Given John launched browser and go to Automation Exercise home page
+    When John clicks on Signup Login button
+    Then John can see: New User Signup!
+    When John enters name "captainFlint" and email "johnflint@protonmail.ch"
+    And John clicks on Signup button
+    Then John can see: ENTER ACCOUNT INFORMATION
+    When John fills account information details: Title "Mr", Name "captainFlint", Email "johnflint@protonmail.ch", Password "walrus", Date of birth "07/07/1924"
+    And John selects newsletter and special offers checkboxes
+    And John fills address information details: First name "John", Last name "Flint", Company "New Providence", Address "6 Lewes Blvd", Address2 "", Country "Canada", State "Yukon", City "Whitehorse", Zipcode "Y1A3J4", Mobile Number "+18675555555"
+    And John clicks on Create Account button
+    Then John can see: ACCOUNT CREATED!
+    When John clicks on account_created page Continue button
+    Then John can see Logged in as "captainFlint" on home page
+    When John clicks on Delete Account button
+    Then John can see: ACCOUNT DELETED!
+    When John clicks on delete_account page Continue button
+    Then John can see the home page
 
   @TestCase5 # Register User with existing email
-  Scenario Outline: Trying to register a user with existing account
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> clicks on Signup Login button
-    Then <actor> can see: New User Signup!
-    When <actor> enters name <name> and email <email>
-    And <actor> clicks on Signup button
-    Then <actor> can see signup error message <expectedMessage>
-    Examples:
-      | actor    | name             | email                          | expectedMessage                |
-      | LongJohn | "LongJohnSilver" | "longjohnsilver@protonmail.ch" | "Email Address already exist!" |
+  Scenario: Trying to register a user with existing account
+    Given Long John launched browser and go to Automation Exercise home page
+    When Long John clicks on Signup Login button
+    Then Long John can see: New User Signup!
+    When Long John enters name "LongJohnSilver" and email "longjohnsilver@protonmail.ch"
+    And Long John clicks on Signup button
+    Then Long John can see signup error message "Email Address already exist!"
 
   @TestCase14 # Place Order: Register while Checkout
-  Scenario Outline: Register while checkout, confirm order and delete account
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> adds to cart the first <numberOfProducts> products
-    And <actor> clicks on Cart button
-    Then <actor> can see the view_cart page
-    When <actor> clicks on Proceed To Checkout button
-    And <actor> clicks on Register Login link
-    And <actor> fills details to SignUp: <userName> <email>
-    And <actor> fills details to Create Account: <title> <userName> <email> <password> <dateOfBirth> <firstName> <lastName> <company> <address> <address2> <country> <state> <city> <zipcode> <number1>
-    Then <actor> can see: ACCOUNT CREATED!
-    When <actor> clicks on account_created page Continue button
-    Then <actor> can see Logged in as <userName> on home page
-    When <actor> clicks on Cart button
-    And <actor> clicks on Proceed To Checkout button
-    Then <actor> can see Address Details and Review Your Order titles
-    When <actor> enters <description> in comment text area
-    And <actor> clicks on Place Order button
-    Then <actor> can see Payment title
-    When <actor> enters payment details: Name on Card <lastName>, Card Number <cardNumber>, CVC <cvc>, Expiration date <expiration>
-    And <actor> clicks on Pay and Confirm Order button
-    Then <actor> can see success message: Congratulations! Your order has been confirmed!
-    When <actor> clicks on Delete Account button
-    Then <actor> can see: ACCOUNT DELETED!
-    When <actor> clicks on delete_account page Continue button
-    Then <actor> can see the home page
-    Examples:
-      | actor | numberOfProducts | userName       | email                     | title | password | dateOfBirth  | firstName | lastName | company          | address        | address2 | country  | state   | city         | zipcode  | number1        | description | cardNumber         | cvc   | expiration |
-      | John  | 3                | "captainFlint" | "johnflint@protonmail.ch" | "Mr"  | "walrus" | "07/07/1924" | "John"    | "Flint"  | "New Providence" | "6 Lewes Blvd" | ""       | "Canada" | "Yukon" | "Whitehorse" | "Y1A3J4" | "+18675555555" | "Thank you" | "4444444444444111" | "520" | "07/30"    |
+  Scenario: Register while checkout, confirm order and delete account
+    Given John launched browser and go to Automation Exercise home page
+    When John adds to cart the first 3 products
+    And John clicks on Cart button
+    Then John can see the view_cart page
+    When John clicks on Proceed To Checkout button
+    And John clicks on Register Login link
+    And John fills details to SignUp: "captainFlint" "johnflint@protonmail.ch"
+    And John fills details to Create Account: "Mr" "captainFlint" "johnflint@protonmail.ch" "walrus" "07/07/1924" "John" "Flint" "New Providence" "6 Lewes Blvd" "" "Canada" "Yukon" "Whitehorse" "Y1A3J4" "+18675555555"
+    Then John can see: ACCOUNT CREATED!
+    When John clicks on account_created page Continue button
+    Then John can see Logged in as "captainFlint" on home page
+    When John clicks on Cart button
+    And John clicks on Proceed To Checkout button
+    Then John can see Address Details and Review Your Order titles
+    When John enters "Thank you" in comment text area
+    And John clicks on Place Order button
+    Then John can see Payment title
+    When John enters payment details: Name on Card "Flint", Card Number "4444444444444111", CVC "520", Expiration date "07/30"
+    And John clicks on Pay and Confirm Order button
+    Then John can see success message: Congratulations! Your order has been confirmed!
+    When John clicks on Delete Account button
+    Then John can see: ACCOUNT DELETED!
+    When John clicks on delete_account page Continue button
+    Then John can see the home page
 
   @TestCase15 # Place Order: Register before Checkout
-  Scenario Outline: Register before checkout, confirm order and delete account
-    Given <actor> launched browser and go to Automation Exercise home page
-    When <actor> clicks on Signup Login button
-    And <actor> fills details to SignUp: <userName> <email>
-    And <actor> fills details to Create Account: <title> <userName> <email> <password> <dateOfBirth> <firstName> <lastName> <company> <address> <address2> <country> <state> <city> <zipcode> <number1>
-    Then <actor> can see: ACCOUNT CREATED!
-    When <actor> clicks on account_created page Continue button
-    Then <actor> can see Logged in as <userName> on home page
-    When <actor> adds to cart the first <numberOfProducts> products
-    And <actor> clicks on Cart button
-    Then <actor> can see the view_cart page
-    When <actor> clicks on Proceed To Checkout button
-    Then <actor> can see Address Details and Review Your Order titles
-    When <actor> enters <description> in comment text area
-    And <actor> clicks on Place Order button
-    Then <actor> can see Payment title
-    When <actor> enters payment details: Name on Card <lastName>, Card Number <cardNumber>, CVC <cvc>, Expiration date <expiration>
-    And <actor> clicks on Pay and Confirm Order button
-    Then <actor> can see success message: Congratulations! Your order has been confirmed!
-    When <actor> clicks on Delete Account button
-    Then <actor> can see: ACCOUNT DELETED!
-    When <actor> clicks on delete_account page Continue button
-    Then <actor> can see the home page
-    Examples:
-      | actor | numberOfProducts | userName       | email                     | title | password | dateOfBirth  | firstName | lastName | company          | address        | address2 | country  | state   | city         | zipcode  | number1        | description | cardNumber         | cvc   | expiration |
-      | John  | 3                | "captainFlint" | "johnflint@protonmail.ch" | "Mr"  | "walrus" | "07/07/1924" | "John"    | "Flint"  | "New Providence" | "6 Lewes Blvd" | ""       | "Canada" | "Yukon" | "Whitehorse" | "Y1A3J4" | "+18675555555" | "Thank you" | "4444444444444111" | "520" | "07/30"    |
+  Scenario: Register before checkout, confirm order and delete account
+    Given John launched browser and go to Automation Exercise home page
+    When John clicks on Signup Login button
+    And John fills details to SignUp: "captainFlint" "johnflint@protonmail.ch"
+    And John fills details to Create Account: "Mr" "captainFlint" "johnflint@protonmail.ch" "walrus" "07/07/1924" "John" "Flint" "New Providence" "6 Lewes Blvd" "" "Canada" "Yukon" "Whitehorse" "Y1A3J4" "+18675555555"
+    Then John can see: ACCOUNT CREATED!
+    When John clicks on account_created page Continue button
+    Then John can see Logged in as "captainFlint" on home page
+    When John adds to cart the first 3 products
+    And John clicks on Cart button
+    Then John can see the view_cart page
+    When John clicks on Proceed To Checkout button
+    Then John can see Address Details and Review Your Order titles
+    When John enters "Thank you" in comment text area
+    And John clicks on Place Order button
+    Then John can see Payment title
+    When John enters payment details: Name on Card "Flint", Card Number "4444444444444111", CVC "520", Expiration date "07/30"
+    And John clicks on Pay and Confirm Order button
+    Then John can see success message: Congratulations! Your order has been confirmed!
+    When John clicks on Delete Account button
+    Then John can see: ACCOUNT DELETED!
+    When John clicks on delete_account page Continue button
+    Then John can see the home page
