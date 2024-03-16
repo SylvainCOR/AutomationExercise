@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddToCart {
 
-    public static Performable FirstThreeProducts(Integer number) {
+    public static Performable MultipleProducts(Integer number) {
         List<Performable> tasks = new ArrayList<>();
         for (int i = 1; i <= number; i++) {
             String pathToAdd = HomePage.ADD_TO_CART.getCssOrXPathSelector() + "[" + i + "]";
@@ -19,5 +19,4 @@ public class AddToCart {
         }
         return Task.where(tasks.toArray(new Performable[0]));
     }
-
 }

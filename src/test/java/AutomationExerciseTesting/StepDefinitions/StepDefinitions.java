@@ -1,6 +1,9 @@
 package AutomationExerciseTesting.StepDefinitions;
 
-import AutomationExerciseTesting.ActionTasks.*;
+import AutomationExerciseTesting.ActionTasks.AddToCart;
+import AutomationExerciseTesting.ActionTasks.FillFormDetailsIn;
+import AutomationExerciseTesting.ActionTasks.HandleDialogBox;
+import AutomationExerciseTesting.ActionTasks.VerifyThat;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,27 +11,27 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.HoverOverTarget;
-import net.serenitybdd.screenplay.actions.Scroll;
+import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Displayed;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.questions.Visibility;
-import net.serenitybdd.screenplay.waits.Wait;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
 public class StepDefinitions {
 
     @Given("{actor} launched browser and go to Automation Exercise home page")
-    public void goToAutomationExerciseHomePage(Actor actor) {
+    public void openAutomationExerciseHomePage(Actor actor) {
         actor.attemptsTo(
-                NavigateToThe.AutomationExerciseHomePage()
+                Open.browserOn().the(HomePage.class),
+                Ensure.that(HomePage.HOME_LINK).isDisplayed()
         );
     }
     @When("{actor} clicks on Signup Login button")
@@ -46,7 +49,8 @@ public class StepDefinitions {
     @When("{actor} enters name {string} and email {string}")
     public void enterNameAndEmail(Actor actor, String name, String email) {
         actor.attemptsTo(
-                FillTheForm.ToSignUp(name, email)
+                Enter.theValue(name).into(LoginPage.SIGN_UP_NAME_FIELD),
+                Enter.theValue(email).into(LoginPage.SIGN_UP_EMAIL_FIELD)
         );
     }
     @And("{actor} clicks on Signup button")
@@ -65,7 +69,7 @@ public class StepDefinitions {
     public void fillAccountInformationDetails(Actor actor, String title, String userName, String email,
                                                                  String password, String dateOfBirth) {
         actor.attemptsTo(
-                FillTheForm.WithAccountInformation(title, userName, email, password, dateOfBirth)
+                FillFormDetailsIn.AccountInformation(title, userName, email, password, dateOfBirth)
         );
     }
     @And("{actor} selects newsletter and special offers checkboxes")
@@ -80,7 +84,7 @@ public class StepDefinitions {
     public void fillAddressInformationDetails(Actor actor, String firstName, String lastName, String company, String address, String address2,
                                                      String country, String state, String city, String zipcode, String number) {
         actor.attemptsTo(
-                FillTheForm.WithAddressInformation(firstName, lastName,
+                FillFormDetailsIn.AddressInformation(firstName, lastName,
                         company, address, address2, country, state, city, zipcode, number)
         );
     }
@@ -129,7 +133,7 @@ public class StepDefinitions {
     @Then("{actor} can see the home page")
     public void checkHomePageIsVisible(Actor actor) {
         actor.attemptsTo(
-                Wait.until( () -> Visibility.of(HomePage.SLIDER_CAROUSEL).answeredBy(actor)),
+                //Wait.until( () -> Visibility.of(HomePage.SLIDER_CAROUSEL).answeredBy(actor)),
                 Ensure.that(Visibility.of(HomePage.SLIDER_CAROUSEL)).isTrue()
         );
     }
@@ -142,7 +146,8 @@ public class StepDefinitions {
     @When("{actor} enters email {string} and password {string}")
     public void enterEmailAndPassword(Actor actor, String email, String password) {
         actor.attemptsTo(
-                FillTheForm.ToLogIn(email, password)
+                Enter.theValue(email).into(LoginPage.LOG_IN_EMAIL_FIELD),
+                Enter.theValue(password).into(LoginPage.LOG_IN_PASSWORD_FIELD)
         );
     }
     @And("{actor} clicks on Login button")
@@ -190,7 +195,7 @@ public class StepDefinitions {
     @When("{actor} enters name {string} email {string} subject {string} and message {string}")
     public void enterNameEmailSubjectAndMessage(Actor actor, String name, String email, String subject, String message) {
         actor.attemptsTo(
-                FillTheForm.ToContactSupport(name, email, subject, message)
+                FillFormDetailsIn.ContactSupport(name, email, subject, message)
         );
     }
     @And("{actor} uploads file {string}")
@@ -232,7 +237,7 @@ public class StepDefinitions {
     @Then("{actor} can see the test_cases page")
     public void checkTestCasesPage(Actor actor) {
         actor.attemptsTo(
-                Wait.until( () -> Visibility.of(TestCasesPage.TITLE).answeredBy(actor)),
+                //Wait.until( () -> Visibility.of(TestCasesPage.TITLE).answeredBy(actor)),
                 Ensure.that(Visibility.of(TestCasesPage.TITLE)).isTrue()
         );
     }
@@ -245,7 +250,7 @@ public class StepDefinitions {
     @Then("{actor} can see products list title: ALL PRODUCTS")
     public void checkProductsListTitle(Actor actor) {
         actor.attemptsTo(
-                Wait.until( () -> Visibility.of(ProductsPage.PRODUCTS_LIST).answeredBy(actor)),
+                //( () -> Visibility.of(ProductsPage.PRODUCTS_LIST).answeredBy(actor)),
                 Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("ALL PRODUCTS")
         );
     }
@@ -265,14 +270,19 @@ public class StepDefinitions {
     @Then("{actor} can see product_details page")
     public void checkProductDetailsPage(Actor actor) {
         actor.attemptsTo(
-                Wait.until( () -> Visibility.of(ProductDetailsPage.PRODUCT_DETAILS).answeredBy(actor)),
+                //Wait.until( () -> Visibility.of(ProductDetailsPage.PRODUCT_DETAILS).answeredBy(actor)),
                 Ensure.that(Visibility.of(ProductDetailsPage.PRODUCT_DETAILS)).isTrue()
         );
     }
     @And("{actor} can see details: product name, category, price, availability, condition, brand")
     public void checkDetailsOfTheProduct(Actor actor) {
         actor.attemptsTo(
-                VerifyThat.DetailsAreVisible()
+                Ensure.that(Visibility.of(ProductDetailsPage.PRODUCT_NAME)).isTrue(),
+                Ensure.that(Visibility.of(ProductDetailsPage.CATEGORY)).isTrue(),
+                Ensure.that(Visibility.of(ProductDetailsPage.PRICE)).isTrue(),
+                Ensure.that(Visibility.of(ProductDetailsPage.AVAILABILITY)).isTrue(),
+                Ensure.that(Visibility.of(ProductDetailsPage.CONDITION)).isTrue(),
+                Ensure.that(Visibility.of(ProductDetailsPage.BRAND)).isTrue()
         );
     }
     @When("{actor} enters product name {string} in search input")
@@ -293,9 +303,8 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("SEARCHED PRODUCTS")
         );
     }
-    @And("products related to the search {string} are visible")
-    public void productsRelatedToTheSearchAreVisible(String productName) {
-        Actor actor = OnStage.theActorInTheSpotlight();
+    @And("{actor} can see all products related to the search {string}")
+    public void checkAllProductsRelatedToTheSearch(Actor actor, String productName) {
         actor.attemptsTo(
                 Ensure.that(Text.ofEach(ProductsPage.PRODUCT_NAME).asString()).containsIgnoringCase(productName)
         );
@@ -429,7 +438,7 @@ public class StepDefinitions {
     @When("{actor} adds to cart the first {int} products")
     public void addProductsToCart(Actor actor, Integer number) {
         actor.attemptsTo(
-                AddToCart.FirstThreeProducts(number)
+                AddToCart.MultipleProducts(number)
         );
     }
     @And("{actor} clicks on Cart button")
@@ -499,7 +508,7 @@ public class StepDefinitions {
     @When("{actor} enters payment details: Name on Card {string}, Card Number {string}, CVC {string}, Expiration date {string}")
     public void fillPaymentDetails(Actor actor, String lastName, String cardNumber, String cvc, String expiration) {
         actor.attemptsTo(
-                FillTheForm.WithPaymentDetails(lastName, cardNumber, cvc, expiration)
+                FillFormDetailsIn.Payment(lastName, cardNumber, cvc, expiration)
         );
     }
     @And("{actor} clicks on Pay and Confirm Order button")
@@ -594,5 +603,29 @@ public class StepDefinitions {
         actor.attemptsTo(
                 Click.on(BrandProductsPage.BIBA_BRAND)
         );
+    }
+    @When("{actor} adds those products to cart")
+    public void addRelatedSearchProductsToCart(Actor actor) {
+        Collection<String> productsNames = new ArrayList<>();
+        actor.attemptsTo(
+                PerformOn.eachMatching(ProductsPage.PRODUCT_NAME,
+                        product -> {
+                                actor.attemptsTo(
+                                        HoverOverTarget.over(product),
+                                        Click.on(ProductsPage.ADD_TO_CART_OVERLAY_BUTTON),
+                                        Click.on(ProductsPage.CONTINUE_SHOPPING)
+                                );
+                                productsNames.add(product.getText());
+                        }
+                )
+        );
+        actor.remember("productsNames", productsNames);
+        System.out.println(productsNames);
+    }
+    @Then("{actor} can see added products in the cart")
+    public void checkAddedProductsInTheCart(Actor actor) {
+        Collection<String> productsAdded = actor.recall("productsNames");
+        System.out.println(productsAdded);
+
     }
 }

@@ -41,4 +41,6 @@ public class ProductsPage {
             .locatedBy("//*[@class='brands_products']/h2");
     public static Target HM_BRAND = Target.the("H&M brand in left side bar")
             .locatedBy("//a[text()='H&M']");
+    public static Target ADD_TO_CART_OVERLAY_BUTTON = Target.the("add to cart overlay link")
+            .locatedBy("//*[@class='overlay-content']/a");
 }

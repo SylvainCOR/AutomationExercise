@@ -21,7 +21,7 @@ Feature: Search and add products
     When Customer enters product name "jeans" in search input
     And Customer clicks on search button
     Then Customer can see research title: SEARCHED PRODUCTS
-    And products related to the search "jeans" are visible
+    And Customer can see all products related to the search "Jeans"
 
   @TestCase12 # Add Products in Cart
   Scenario: Add first product to the cart, then the second one and verify
