@@ -19,5 +19,5 @@ Feature: Memorized cart
     And John fills details to Login: "longjohnsilver@protonmail.ch" "hispaniola"
     And John clicks on Cart button
     Then John can see added products in the cart
-    And John can see Then Long John can see Logged in as "LongJohnSilver" on view_cart page
+    Then John can see Logged in as "LongJohnSilver" on view_cart page
 

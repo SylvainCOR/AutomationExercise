@@ -29,5 +29,7 @@ public class ViewCartPage {
     public static Target REGISTER_LOGIN = Target.the("register / login link")
             .locatedBy("//*[@id='checkoutModal']//u");
     public static Target PRODUCT_NAME = Target.the("all product names in the cart")
-            .locatedBy("//*[@class='cart_description']/h4");
+            .locatedBy("//*[@id='cart_info_table']//h4/a");
+    public static Target LOGGED_IN = Target.the("header logged in as username link")
+            .locatedBy("//i[contains(@class,'user')]/..");
 }

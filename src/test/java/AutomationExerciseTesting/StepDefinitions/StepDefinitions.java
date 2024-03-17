@@ -20,8 +20,7 @@ import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 
@@ -606,26 +605,24 @@ public class StepDefinitions {
     }
     @When("{actor} adds those products to cart")
     public void addRelatedSearchProductsToCart(Actor actor) {
-        Collection<String> productsNames = new ArrayList<>();
+        List<String> productsNames = (List<String>) Text.ofEach(ProductsPage.PRODUCT_NAME).answeredBy(actor);
         actor.attemptsTo(
-                PerformOn.eachMatching(ProductsPage.PRODUCT_NAME,
-                        product -> {
-                                actor.attemptsTo(
-                                        HoverOverTarget.over(product),
-                                        Click.on(ProductsPage.ADD_TO_CART_OVERLAY_BUTTON),
-                                        Click.on(ProductsPage.CONTINUE_SHOPPING)
-                                );
-                                productsNames.add(product.getText());
-                        }
-                )
+                AddToCart.MultipleProducts(productsNames.size())
         );
-        actor.remember("productsNames", productsNames);
-        System.out.println(productsNames);
+        actor.remember("productsAdded", productsNames);
     }
     @Then("{actor} can see added products in the cart")
     public void checkAddedProductsInTheCart(Actor actor) {
-        Collection<String> productsAdded = actor.recall("productsNames");
-        System.out.println(productsAdded);
-
+        List<String> productsAdded = actor.recall("productsAdded");
+        List<String> productsInCart = (List<String>) Text.ofEach(ViewCartPage.PRODUCT_NAME).answeredBy(actor);
+        actor.attemptsTo(
+                Ensure.that(productsInCart).isEqualTo(productsAdded)
+        );
+    }
+    @Then("{actor} can see Logged in as {string} on view_cart page")
+    public void checkLoggedInFromCart(Actor actor, String username) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(ViewCartPage.LOGGED_IN)).isEqualTo("Logged in as " + username)
+        );
     }
 }
