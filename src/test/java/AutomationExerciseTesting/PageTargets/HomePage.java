@@ -49,4 +49,8 @@ public class HomePage extends PageObject {
             .locatedBy("//*[@href='#Women']");
     public static Target DRESS_SUBCATEGORY = Target.the("dress sub-category link")
             .locatedBy("//*[@id='Women']//a[text()='Dress ']");
+    public static Target RECOMMENDED_ITEMS_TITLE = Target.the("recommended items title")
+            .locatedBy("//*[@class='recommended_items']/h2");
+    public static Target ADD_TO_CART_RECOMMENDED_PRODUCT = Target.the("add to cart button of recommended")
+            .locatedBy("//*[@id='recommended-item-carousel']//a[contains(@class,'add-to-cart')]");
 }

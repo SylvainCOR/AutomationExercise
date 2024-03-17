@@ -661,4 +661,23 @@ public class StepDefinitions {
                         .isEqualToIgnoringCase("Thank you for your review.")
         );
     }
+    @When("{actor} scrolls to the footer")
+    public void scrollToTheFooter(Actor actor) {
+        actor.attemptsTo(
+                Scroll.to(HomePage.FOOTER).andAlignToBottom()
+        );
+    }
+    @Then("{actor} can see recommended products title: RECOMMENDED ITEMS")
+    public void checkRecommendedProductsTitle(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(HomePage.RECOMMENDED_ITEMS_TITLE))
+                        .isEqualToIgnoringCase("RECOMMENDED ITEMS")
+        );
+    }
+    @When("{actor} clicks on Add To Cart button of {string}")
+    public void clickOnAddToCartButtonOfRecommendedProduct(Actor actor, String recommendedProduct) {
+        actor.attemptsTo(
+
+        );
+    }
 }
