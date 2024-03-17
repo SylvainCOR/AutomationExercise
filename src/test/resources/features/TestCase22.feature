@@ -8,6 +8,6 @@ Feature: Recommended products
     Given Customer launched browser and go to Automation Exercise home page
     When Customer scrolls to the footer
     Then Customer can see recommended products title: RECOMMENDED ITEMS
-    When Customer clicks on Add To Cart button of "Stylish Dress"
+    When Customer clicks on Add To Cart button of "Blue Top"
     And Customer clicks on View Cart button
-    Then Customer should see "Stylish Dress" in the cart
+    Then Customer should see the product name in the cart

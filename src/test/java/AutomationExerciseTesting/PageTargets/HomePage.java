@@ -51,6 +51,9 @@ public class HomePage extends PageObject {
             .locatedBy("//*[@id='Women']//a[text()='Dress ']");
     public static Target RECOMMENDED_ITEMS_TITLE = Target.the("recommended items title")
             .locatedBy("//*[@class='recommended_items']/h2");
-    public static Target ADD_TO_CART_RECOMMENDED_PRODUCT = Target.the("add to cart button of recommended")
-            .locatedBy("//*[@id='recommended-item-carousel']//a[contains(@class,'add-to-cart')]");
+    public static Target ADD_TO_CART_RECOMMENDED_PRODUCT(String productName) {
+        return Target.the("add to cart button of" + productName)
+                .locatedBy("//*[@id='recommended-item-carousel']" +
+                        "//div[@class='single-products'][contains(.,'" + productName + "')]//a");
+    }
 }

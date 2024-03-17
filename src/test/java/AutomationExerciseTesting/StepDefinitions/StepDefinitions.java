@@ -675,9 +675,17 @@ public class StepDefinitions {
         );
     }
     @When("{actor} clicks on Add To Cart button of {string}")
-    public void clickOnAddToCartButtonOfRecommendedProduct(Actor actor, String recommendedProduct) {
+    public void clickOnAddToCartButtonOfRecommendedProduct(Actor actor, String productName) {
         actor.attemptsTo(
-
+                Click.on(HomePage.ADD_TO_CART_RECOMMENDED_PRODUCT(productName))
+        );
+        actor.remember("recommendedProduct", productName);
+    }
+    @Then("{actor} should see the product name in the cart")
+    public void shouldSeeProductNameInTheCart(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Text.of(ViewCartPage.PRODUCT_NAME))
+                        .isEqualTo(actor.recall("recommendedProduct"))
         );
     }
 }
