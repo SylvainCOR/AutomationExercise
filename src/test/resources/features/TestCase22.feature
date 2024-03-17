@@ -1,7 +1,7 @@
 Feature: Recommended products
   As a Customer
-  I want to write a product review
-  So that I submit my impression
+  I want to find a recommended product selection
+  So that I can order product from suggestion
 
   @TestCase22
   Scenario: Add to cart from Recommended items
