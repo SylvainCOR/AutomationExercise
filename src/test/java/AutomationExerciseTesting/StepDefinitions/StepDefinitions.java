@@ -625,4 +625,40 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ViewCartPage.LOGGED_IN)).isEqualTo("Logged in as " + username)
         );
     }
+    @When("{actor} clicks on polo t-shirts View Product button")
+    public void clickOnPoloTShirtViewProductButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductsPage.POLO_TSHIRTS_VIEW_PRODUCT)
+        );
+    }
+    @Then("{actor} can see the text: WRITE YOUR REVIEW")
+    public void checkTheTextWriteYourReview(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ProductDetailsPage.WRITE_YOUR_REVIEW)).isTrue(),
+                Ensure.that(Text.of(ProductDetailsPage.WRITE_YOUR_REVIEW))
+                        .isEqualToIgnoringCase("WRITE YOUR REVIEW")
+        );
+    }
+    @When("{actor} enters name {string} email {string} and review {string}")
+    public void enterNameEmailAndReview(Actor actor, String name, String email, String review) {
+        actor.attemptsTo(
+                Enter.theValue(name).into(ProductDetailsPage.NAME),
+                Enter.theValue(email).into(ProductDetailsPage.EMAIL),
+                Enter.theValue(review).into(ProductDetailsPage.REVIEW)
+        );
+    }
+    @And("{actor} clicks on review Submit button")
+    public void clickOnReviewSubmitButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(ProductDetailsPage.SUBMIT_BUTTON)
+        );
+    }
+    @Then("{actor} can see success message: Thank you for your review.")
+    public void checkReviewSuccessMessage(Actor actor) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(ProductDetailsPage.REVIEW_SUCCESS_MESSAGE)).isTrue(),
+                Ensure.that(Text.of(ProductDetailsPage.REVIEW_SUCCESS_MESSAGE))
+                        .isEqualToIgnoringCase("Thank you for your review.")
+        );
+    }
 }

@@ -22,4 +22,16 @@ public class ProductDetailsPage {
             .locatedBy("#quantity");
     public static Target ADD_TO_CART = Target.the("add to cart button")
             .locatedBy("//button[contains(@class,'cart')]");
+    public static Target WRITE_YOUR_REVIEW = Target.the("write your review text")
+            .locatedBy("//*[@class='active']/a");
+    public static Target NAME = Target.the("name field")
+            .locatedBy("#name");
+    public static Target EMAIL = Target.the("email field")
+            .locatedBy("#email");
+    public static Target REVIEW = Target.the("review field")
+            .locatedBy("//*[@name='review']");
+    public static Target SUBMIT_BUTTON = Target.the("submit button")
+            .locatedBy("#button-review");
+    public static Target REVIEW_SUCCESS_MESSAGE = Target.the("review success message")
+            .locatedBy("//*[@id='review-section']//span");
 }
