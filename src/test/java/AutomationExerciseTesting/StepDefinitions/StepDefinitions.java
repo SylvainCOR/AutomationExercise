@@ -308,8 +308,8 @@ public class StepDefinitions {
                 Ensure.that(Text.ofEach(ProductsPage.PRODUCT_NAME).asString()).containsIgnoringCase(productName)
         );
     }
-    @When("{actor} scrolls down to footer")
-    public void scrollDownToFooter(Actor actor) {
+    @When("{actor} scrolls down to the bottom of page")
+    public void scrollDownToBottom(Actor actor) {
         actor.attemptsTo(
                 Scroll.to(HomePage.FOOTER).andAlignToBottom()
         );
@@ -694,6 +694,12 @@ public class StepDefinitions {
                 Ensure.that(Visibility.of(HomePage.WEBSITE_DESCRIPTION_TITLE)).isTrue(),
                 Ensure.that(Text.of(HomePage.WEBSITE_DESCRIPTION_TITLE))
                         .isEqualTo(descriptionTitle)
+        );
+    }
+    @When("{actor} scrolls up to the top of page")
+    public void scrollUpToTop(Actor actor) {
+        actor.attemptsTo(
+                Scroll.to(HomePage.HOME_LINK).andAlignToTop()
         );
     }
 }
