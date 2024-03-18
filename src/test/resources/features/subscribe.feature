@@ -6,7 +6,7 @@ Feature: Subscription
   @TestCase10 # Verify Subscription in home page
   Scenario: Verify subscription in home page
     Given Customer launched browser and go to Automation Exercise home page
-    When Customer scrolls down to footer
+    When Customer scrolls down to the bottom of page
     Then Customer can see title: SUBSCRIPTION
     When Customer enters email "johnflint@protonmail.ch" in input
     And Customer clicks on arrow button
@@ -16,7 +16,7 @@ Feature: Subscription
   Scenario: Verify subscription in Cart page
     Given Customer launched browser and go to Automation Exercise home page
     When Customer clicks on Cart button
-    And Customer scrolls down to footer
+    And Customer scrolls down to the bottom of page
     Then Customer can see title: SUBSCRIPTION
     When Customer enters email "johnflint@protonmail.ch" in input
     And Customer clicks on arrow button
