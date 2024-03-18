@@ -311,7 +311,7 @@ public class StepDefinitions {
     @When("{actor} scrolls down to footer")
     public void scrollDownToFooter(Actor actor) {
         actor.attemptsTo(
-                Scroll.to(HomePage.FOOTER)
+                Scroll.to(HomePage.FOOTER).andAlignToBottom()
         );
     }
     @Then("{actor} can see title: SUBSCRIPTION")
@@ -661,12 +661,6 @@ public class StepDefinitions {
                         .isEqualToIgnoringCase("Thank you for your review.")
         );
     }
-    @When("{actor} scrolls to the footer")
-    public void scrollToTheFooter(Actor actor) {
-        actor.attemptsTo(
-                Scroll.to(HomePage.FOOTER).andAlignToBottom()
-        );
-    }
     @Then("{actor} can see recommended products title: RECOMMENDED ITEMS")
     public void checkRecommendedProductsTitle(Actor actor) {
         actor.attemptsTo(
@@ -686,6 +680,20 @@ public class StepDefinitions {
         actor.attemptsTo(
                 Ensure.that(Text.of(ViewCartPage.PRODUCT_NAME))
                         .isEqualTo(actor.recall("recommendedProduct"))
+        );
+    }
+    @When("{actor} clicks on Arrow button at bottom right side")
+    public void clickOnArrowButtonAtBottomRightSide(Actor actor) {
+        actor.attemptsTo(
+                Click.on(HomePage.ARROW_BUTTON)
+        );
+    }
+    @Then("Page is scrolled up and {actor} can see visible text: {string}")
+    public void checkPageIsScrolledUp(Actor actor, String descriptionTitle) {
+        actor.attemptsTo(
+                Ensure.that(Visibility.of(HomePage.WEBSITE_DESCRIPTION_TITLE)).isTrue(),
+                Ensure.that(Text.of(HomePage.WEBSITE_DESCRIPTION_TITLE))
+                        .isEqualTo(descriptionTitle)
         );
     }
 }
