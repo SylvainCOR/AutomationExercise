@@ -12,7 +12,6 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.*;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Displayed;
 import net.serenitybdd.screenplay.questions.Text;
@@ -20,6 +19,7 @@ import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
@@ -198,9 +198,12 @@ public class StepDefinitions {
         );
     }
     @And("{actor} uploads file {string}")
-    public void uploadFile(Actor actor, String filepath) {
+    public void uploadFile(Actor actor, String relativeFilePath) {
+        String absoluteFilePath = Paths.get("").toAbsolutePath() + "/" + relativeFilePath;
+        System.out.println(absoluteFilePath);
+        System.out.println(relativeFilePath);
         actor.attemptsTo(
-                Enter.theValue(filepath).into(ContactUsPage.UPLOAD_INPUT)
+                Enter.theValue(absoluteFilePath).into(ContactUsPage.UPLOAD_INPUT)
         );
     }
     @And("{actor} clicks on Submit button")
@@ -236,7 +239,6 @@ public class StepDefinitions {
     @Then("{actor} can see the test_cases page")
     public void checkTestCasesPage(Actor actor) {
         actor.attemptsTo(
-                //Wait.until( () -> Visibility.of(TestCasesPage.TITLE).answeredBy(actor)),
                 Ensure.that(Visibility.of(TestCasesPage.TITLE)).isTrue()
         );
     }
@@ -253,9 +255,8 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("ALL PRODUCTS")
         );
     }
-    @And("the product list is visible")
-    public void checkProductListIsVisible() {
-        Actor actor = OnStage.theActorInTheSpotlight();
+    @And("{actor} can see the product list")
+    public void checkProductListIsVisible(Actor actor) {
         actor.attemptsTo(
                 Ensure.that(Visibility.of(ProductsPage.PRODUCTS_LIST)).isTrue()
         );
@@ -427,9 +428,8 @@ public class StepDefinitions {
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_NAME)).isEqualTo(productName)
         );
     }
-    @And("the quantity is exactly {string}")
-    public void theQuantityIsExactly(String quantity) {
-        Actor actor = OnStage.theActorInTheSpotlight();
+    @And("{actor} can see the quantity is exactly {string}")
+    public void checkTheQuantity(Actor actor, String quantity) {
         actor.attemptsTo(
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_QUANTITY)).isEqualTo(quantity)
         );
@@ -685,15 +685,15 @@ public class StepDefinitions {
     @When("{actor} clicks on Arrow button at bottom right side")
     public void clickOnArrowButtonAtBottomRightSide(Actor actor) {
         actor.attemptsTo(
-                Click.on(HomePage.ARROW_BUTTON)
+                Click.on(HomePage.ARROW_BUTTON),
+                WaitUntil.the(invisibilityOfElementLocated(By.xpath(HomePage.ARROW_BUTTON.getCssOrXPathSelector())))
         );
     }
-    @Then("Page is scrolled up and {actor} can see visible text: {string}")
+    @Then("page is scrolled up and {actor} can see visible text: {string}")
     public void checkPageIsScrolledUp(Actor actor, String descriptionTitle) {
         actor.attemptsTo(
                 Ensure.that(Visibility.of(HomePage.WEBSITE_DESCRIPTION_TITLE)).isTrue(),
-                Ensure.that(Text.of(HomePage.WEBSITE_DESCRIPTION_TITLE))
-                        .isEqualTo(descriptionTitle)
+                Ensure.that(Text.of(HomePage.WEBSITE_DESCRIPTION_TITLE)).isEqualTo(descriptionTitle)
         );
     }
     @When("{actor} scrolls up to the top of page")

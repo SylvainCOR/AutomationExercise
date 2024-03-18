@@ -56,7 +56,7 @@ public class HomePage extends PageObject {
                 .locatedBy("//*[@id='recommended-item-carousel']" +
                         "//div[@class='single-products'][contains(.,'" + productName + "')]//a");
     }
-    public static Target ARROW_BUTTON = Target.the("arrow button to scroll up")
+    public static Target ARROW_BUTTON = Target.the("scroll up arrow button")
             .locatedBy("#scrollUp");
     public static Target WEBSITE_DESCRIPTION_TITLE = Target.the("description title in carousel slider")
             .locatedBy("//*[@id='slider-carousel']//*[@class='item active']//h2");

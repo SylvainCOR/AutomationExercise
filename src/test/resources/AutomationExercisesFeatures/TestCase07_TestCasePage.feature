@@ -3,8 +3,8 @@ Feature: Access to exercise page
   I want to go to test cases page
   So that I can practise with automation
 
-  @TestCase7 # Verify Test Cases Page
-  Scenario: Navigation to test cases page
+  @TestCase7
+  Scenario: Verify Test Cases Page
     Given Tester launched browser and go to Automation Exercise home page
-    When Tester clicks on Test Cases button
-    Then Tester can see the test_cases page
+    When he clicks on Test Cases button
+    Then he can see the test_cases page
