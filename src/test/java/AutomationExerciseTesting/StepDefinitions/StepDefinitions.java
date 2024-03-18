@@ -132,7 +132,6 @@ public class StepDefinitions {
     @Then("{actor} can see the home page")
     public void checkHomePageIsVisible(Actor actor) {
         actor.attemptsTo(
-                //Wait.until( () -> Visibility.of(HomePage.SLIDER_CAROUSEL).answeredBy(actor)),
                 Ensure.that(Visibility.of(HomePage.SLIDER_CAROUSEL)).isTrue()
         );
     }
@@ -251,7 +250,6 @@ public class StepDefinitions {
     @Then("{actor} can see products list title: ALL PRODUCTS")
     public void checkProductsListTitle(Actor actor) {
         actor.attemptsTo(
-                //( () -> Visibility.of(ProductsPage.PRODUCTS_LIST).answeredBy(actor)),
                 Ensure.that(Text.of(ProductsPage.PRODUCTS_LIST_TITLE)).isEqualToIgnoringCase("ALL PRODUCTS")
         );
     }
@@ -270,7 +268,6 @@ public class StepDefinitions {
     @Then("{actor} can see product_details page")
     public void checkProductDetailsPage(Actor actor) {
         actor.attemptsTo(
-                //Wait.until( () -> Visibility.of(ProductDetailsPage.PRODUCT_DETAILS).answeredBy(actor)),
                 Ensure.that(Visibility.of(ProductDetailsPage.PRODUCT_DETAILS)).isTrue()
         );
     }
@@ -702,4 +699,5 @@ public class StepDefinitions {
                 Scroll.to(HomePage.HOME_LINK).andAlignToTop()
         );
     }
+
 }
