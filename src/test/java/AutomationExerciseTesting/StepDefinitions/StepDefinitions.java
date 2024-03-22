@@ -19,6 +19,7 @@ import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
 
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -350,10 +351,10 @@ public class StepDefinitions {
         actor.remember("firstProductName", Text.of(ProductsPage.FIRST_OVERLAY_NAME).answeredBy(actor));
         actor.remember("firstProductPrice", Text.of(ProductsPage.FIRST_OVERLAY_PRICE).answeredBy(actor));
     }
-    @And("{actor} clicks on first overlay Add to cart button")
-    public void clickOnFirstOverlayAddToCartButton(Actor actor) {
+    @And("{actor} clicks on {string} overlay Add to cart button")
+    public void clickOnProductOverlayAddToCartButton(Actor actor, String product) {
         actor.attemptsTo(
-                Click.on(ProductsPage.FIRST_OVERLAY_ADD_TO_CART)
+                Click.on(ProductsPage.OVERLAY_ADD_TO_CART(product))
         );
     }
     @And("{actor} clicks on Continue Shopping button")
@@ -369,12 +370,6 @@ public class StepDefinitions {
         );
         actor.remember("secondProductName", Text.of(ProductsPage.SECOND_OVERLAY_NAME).answeredBy(actor));
         actor.remember("secondProductPrice", Text.of(ProductsPage.SECOND_OVERLAY_PRICE).answeredBy(actor));
-    }
-    @And("{actor} clicks on second overlay Add to cart button")
-    public void clickOnSecondOverlayAddToCartButton(Actor actor) {
-        actor.attemptsTo(
-                Click.on(ProductsPage.SECOND_OVERLAY_ADD_TO_CART)
-        );
     }
     @Then("{actor} can see both products are in the cart")
     public void checkBothProductsAreInTheCart(Actor actor) {
@@ -472,9 +467,21 @@ public class StepDefinitions {
                                            String country, String state, String city, String zipcode, String number) {
         fillAccountInformationDetails(actor, title, userName, email, password, dateOfBirth);
         selectCheckboxes(actor);
-        fillAddressInformationDetails(actor, firstName, lastName,
-                company, address, address2, country, state, city, zipcode, number);
+        fillAddressInformationDetails(actor, firstName, lastName, company, address, address2,
+                country, state, city, zipcode, number);
         clickOnCreateAccountButton(actor);
+
+        actor.remember("title", title);
+        actor.remember("firstName", firstName);
+        actor.remember("lastName", lastName);
+        actor.remember("company", company);
+        actor.remember("address1", address);
+        actor.remember("address2", address2);
+        actor.remember("country", country);
+        actor.remember("state", state);
+        actor.remember("city", city);
+        actor.remember("zipcode", zipcode);
+        actor.remember("number", number);
     }
     @Then("{actor} can see Address Details and Review Your Order titles")
     public void checkAddressDetailsAndReviewYourOrderTitles(Actor actor) {
@@ -699,5 +706,78 @@ public class StepDefinitions {
                 Scroll.to(HomePage.HOME_LINK).andAlignToTop()
         );
     }
+    @When("{actor} adds products to cart {string} {string} {string}")
+    public void addProductsToCart(Actor actor, String product1, String product2, String product3) {
+        actor.attemptsTo(
+                AddToCart.ProductsOfList(product1, product2, product3)
+        );
+    }
+    @Then("{actor} can see the delivery address is same address filled at the time registration of account")
+    public void checkDeliveryAddressIsSameAddressFilledAtTheTimeRegistrationOfAccount(Actor actor) {
+        String firstLine = actor.recall("title").toString() + " " + actor.recall("firstName").toString()
+                + " " + actor.recall("lastName").toString();
+        String secondLine = actor.recall("company").toString();
+        String thirdLine = actor.recall("address1").toString();
+        String fourthLine = actor.recall("address2").toString();
+        String fifthLine = actor.recall("city").toString() + " " + actor.recall("state").toString()
+                + " " + actor.recall("zipcode").toString();
+        String sixthLine = actor.recall("country").toString();
+        String seventhLine = actor.recall("number").toString();
 
+        actor.attemptsTo(
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_FIRSTNAME_LASTNAME)).isEqualTo(firstLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_COMPANY)).isEqualTo(secondLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_ADDRESS_1)).isEqualTo(thirdLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_ADDRESS_2)).isEqualTo(fourthLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_CITY_STATE_ZIP)).isEqualTo(fifthLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_COUNTRY)).isEqualTo(sixthLine),
+                Ensure.that(Text.of(CheckoutPage.DELIVERY_PHONE)).isEqualTo(seventhLine)
+        );
+    }
+    @Then("{actor} can see the billing address is same address filled at the time registration of account")
+    public void checkBillingAddressIsSameAddressFilledAtTheTimeRegistrationOfAccount(Actor actor) {
+        String firstLine = actor.recall("title").toString() + " " + actor.recall("firstName").toString()
+                + " " + actor.recall("lastName").toString();
+        String secondLine = actor.recall("company").toString();
+        String thirdLine = actor.recall("address1").toString();
+        String fourthLine = actor.recall("address2").toString();
+        String fifthLine = actor.recall("city").toString() + " " + actor.recall("state").toString()
+                + " " + actor.recall("zipcode").toString();
+        String sixthLine = actor.recall("country").toString();
+        String seventhLine = actor.recall("number").toString();
+
+        actor.attemptsTo(
+                Ensure.that(Text.of(CheckoutPage.BILLING_FIRSTNAME_LASTNAME)).isEqualTo(firstLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_COMPANY)).isEqualTo(secondLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_ADDRESS_1)).isEqualTo(thirdLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_ADDRESS_2)).isEqualTo(fourthLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_CITY_STATE_ZIP)).isEqualTo(fifthLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_COUNTRY)).isEqualTo(sixthLine),
+                Ensure.that(Text.of(CheckoutPage.BILLING_PHONE)).isEqualTo(seventhLine)
+        );
+    }
+    @When("{actor} clicks Download Invoice button")
+    public void clickDownloadInvoiceButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(PaymentDonePage.DOWNLOAD_INVOICE)
+        );
+    }
+    @Then("{actor} can see invoice is downloaded successfully")
+    public void checkInvoiceIsDownloadedSuccessfully(Actor actor) {
+        String downloadFolderPath = System.getProperty("user.home") + "/Downloads";
+        String invoiceFilePath = downloadFolderPath + "/invoice.txt";
+        try {
+            boolean isDownloaded = Files.exists(Paths.get(invoiceFilePath));
+            actor.remember("invoicePath", invoiceFilePath);
+            Ensure.that(isDownloaded).isTrue();
+        } catch (Exception e) {
+            System.err.println("Error occurred while checking invoice download: " + e.getMessage());
+        }
+    }
+    @When("{actor} clicks on payment_done page Continue button")
+    public void clickOnPaymentDonePageContinueButton(Actor actor) {
+        actor.attemptsTo(
+                Click.on(PaymentDonePage.CONTINUE)
+        );
+    }
 }

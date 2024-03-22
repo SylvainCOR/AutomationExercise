@@ -17,8 +17,8 @@ public class FillFormDetailsIn {
 
     public static Performable AccountInformation(String title, String name, String email, String password, String date) {
         Target targetElement = switch (title.toLowerCase()) {
-            case "mr" -> SignupPage.TITLE_GENDER_M;
-            case "mrs" -> SignupPage.TITLE_GENDER_F;
+            case "mr." -> SignupPage.TITLE_GENDER_M;
+            case "mrs." -> SignupPage.TITLE_GENDER_F;
             default -> throw new IllegalArgumentException("Invalid checkbox value: " + title);
         };
         return Task.where("{0} fills account information details",

@@ -9,10 +9,10 @@ Feature: Add products in cart
     When he clicks on Products button
     Then he can see products list title: ALL PRODUCTS
     When he mouse over first product
-    And he clicks on first overlay Add to cart button
+    And he clicks on "Blue Top" overlay Add to cart button
     And he clicks on Continue Shopping button
     And he mouse over second product
-    And he clicks on second overlay Add to cart button
+    And he clicks on "Men Tshirt" overlay Add to cart button
     And he clicks on View Cart button
     Then he can see both products are in the cart
     And he can see details: price, quantity and total price

@@ -1,23 +1,21 @@
-Feature: Registration during checkout
+Feature: Registration before checkout
   As a new customer
-  I want to create an account while checkout
+  I want to create an account before checkout
   So that I place order
 
-  @TestCase14
-  Scenario: Place Order: Register while Checkout
-    Given New customer launched browser and go to Automation Exercise home page
+  @TestCase15
+  Scenario: Place Order: Register before Checkout
+    Given Customer launched browser and go to Automation Exercise home page
+    When he clicks on Signup Login button
+    And he fills details to SignUp: "captainFlint" "johnflint@protonmail.ch"
+    And he fills details to Create Account: "Mr." "captainFlint" "johnflint@protonmail.ch" "walrus" "07/07/1924" "John" "Flint" "New Providence" "6 Lewes Blvd" "" "Canada" "Yukon" "Whitehorse" "Y1A3J4" "+18675555555"
+    Then he can see: ACCOUNT CREATED!
+    When he clicks on account_created page Continue button
+    Then he can see Logged in as "captainFlint" on home page
     When he adds to cart the first 3 products
     And he clicks on Cart button
     Then he can see the view_cart page
     When he clicks on Proceed To Checkout button
-    And he clicks on Register Login link
-    And he fills details to SignUp: "captainFlint" "johnflint@protonmail.ch"
-    And he fills details to Create Account: "Mr" "captainFlint" "johnflint@protonmail.ch" "walrus" "07/07/1924" "John" "Flint" "New Providence" "6 Lewes Blvd" "" "Canada" "Yukon" "Whitehorse" "Y1A3J4" "+18675555555"
-    Then he can see: ACCOUNT CREATED!
-    When he clicks on account_created page Continue button
-    Then he can see Logged in as "captainFlint" on home page
-    When he clicks on Cart button
-    And he clicks on Proceed To Checkout button
     Then he can see Address Details and Review Your Order titles
     When he enters "Thank you" in comment text area
     And he clicks on Place Order button

@@ -11,7 +11,7 @@ Feature: New user registration
     When he enters name "captainFlint" and email "johnflint@protonmail.ch"
     And he clicks on Signup button
     Then he can see: ENTER ACCOUNT INFORMATION
-    When he fills account information details: Title "Mr", Name "captainFlint", Email "johnflint@protonmail.ch", Password "walrus", Date of birth "07/07/1924"
+    When he fills account information details: Title "Mr.", Name "captainFlint", Email "johnflint@protonmail.ch", Password "walrus", Date of birth "07/07/1924"
     And he selects newsletter and special offers checkboxes
     And he fills address information details: First name "John", Last name "Flint", Company "New Providence", Address "6 Lewes Blvd", Address2 "", Country "Canada", State "Yukon", City "Whitehorse", Zipcode "Y1A3J4", Mobile Number "+18675555555"
     And he clicks on Create Account button

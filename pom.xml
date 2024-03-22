@@ -12,15 +12,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- VERSIONS -->
-        <selenium.version>4.18.1</selenium.version>
-        <serenity.version>4.1.0</serenity.version>
-        <junit-vintage-engine.version>5.10.2</junit-vintage-engine.version>
-        <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
-        <cucumber-junit-platform-engine.version>7.15.0</cucumber-junit-platform-engine.version>
-        <logback.version>1.5.0</logback.version>
-        <assertj.version>3.25.3</assertj.version>
-        <maven-mojo.version>3.2.5</maven-mojo.version>
-        <maven-compiler.version>3.12.1</maven-compiler.version>
+        <selenium.version>4.18.1</selenium.version> <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <serenity.version>4.1.4</serenity.version> <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
+        <junit-vintage-engine.version>5.10.2</junit-vintage-engine.version> <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
+        <junit-platform-suite.version>1.10.2</junit-platform-suite.version> <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-api -->
+        <cucumber-junit-platform-engine.version>7.15.0</cucumber-junit-platform-engine.version> <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine -->
+        <logback.version>1.5.3</logback.version> <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <assertj.version>3.25.3</assertj.version> <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <maven-mojo.version>3.2.5</maven-mojo.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+        <maven-compiler.version>3.12.1</maven-compiler.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <source-target.version>21</source-target.version>
     </properties>
 

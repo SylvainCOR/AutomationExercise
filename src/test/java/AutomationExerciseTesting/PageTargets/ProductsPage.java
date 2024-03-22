@@ -17,22 +17,28 @@ public class ProductsPage {
             .locatedBy("//*[@id='submit_search']");
     public static Target PRODUCT_NAME = Target.the("product name")
             .locatedBy("//div[contains(@class,'productinfo')]/p");
+    public static Target PRODUCT_IMAGE(String productName) {
+        return Target.the("image of product" + productName)
+                .locatedBy("//*[@class='single-products']" +
+                        "//p[.='" + productName + "']/../img");
+    }
+    public static Target OVERLAY_ADD_TO_CART(String productName) {
+        return Target.the("add to cart overlay button of" + productName)
+                .locatedBy("//*[@class='features_items']" +
+                        "//div[@class='product-overlay'][contains(.,'" + productName + "')]//a");
+    }
     public static Target FIRST_IMG_PRODUCT = Target.the("image of first product")
             .locatedBy("(//*[@class='single-products']//img)[1]");
-    public static Target FIRST_OVERLAY_ADD_TO_CART = Target.the("add to cart overlay link of first product")
-            .locatedBy("(//*[@class='overlay-content']/a)[1]");
     public static Target FIRST_OVERLAY_PRICE = Target.the("price overlay link of first product")
             .locatedBy("(//*[@class='overlay-content']/h2)[1]");
     public static Target FIRST_OVERLAY_NAME = Target.the("product name overlay link of first product")
             .locatedBy("(//*[@class='overlay-content']/p)[1]");
     public static Target CONTINUE_SHOPPING = Target.the("continue shopping button")
-            .locatedBy("//*[contains(@class,'btn-success')]");
+            .locatedBy("//*[@id='cartModal']//button");
     public static Target VIEW_CART = Target.the("view cart button")
             .locatedBy("//*[@id='cartModal']//u");
     public static Target SECOND_IMG_PRODUCT = Target.the("image of first product")
             .locatedBy("(//*[@class='single-products']//img)[2]");
-    public static Target SECOND_OVERLAY_ADD_TO_CART = Target.the("add to cart overlay link of first product")
-            .locatedBy("(//*[@class='overlay-content']/a)[2]");
     public static Target SECOND_OVERLAY_PRICE = Target.the("price overlay link of second product")
             .locatedBy("(//*[@class='overlay-content']/h2)[2]");
     public static Target SECOND_OVERLAY_NAME = Target.the("product name overlay link of second product")

@@ -24,4 +24,5 @@ public class VerifyThat {
                 Ensure.that(secondTotal).isEqualTo(secondTotalExpected)
         );
     }
+
 }
