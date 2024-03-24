@@ -1,9 +1,9 @@
 package AutomationExerciseTesting.StepDefinitions;
 
 import AutomationExerciseTesting.ActionTasks.AddToCart;
+import AutomationExerciseTesting.ActionTasks.Calculate;
 import AutomationExerciseTesting.ActionTasks.FillFormDetailsIn;
 import AutomationExerciseTesting.ActionTasks.HandleDialogBox;
-import AutomationExerciseTesting.ActionTasks.VerifyThat;
 import AutomationExerciseTesting.PageTargets.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -391,7 +391,7 @@ public class StepDefinitions {
         actor.attemptsTo(
                 Ensure.that(Text.of(ViewCartPage.FIRST_PRODUCT_PRICE)).isEqualTo(firstProductPrice),
                 Ensure.that(Text.of(ViewCartPage.SECOND_PRODUCT_PRICE)).isEqualTo(secondProductPrice),
-                VerifyThat.TotalPriceIsCorrect(actor, firstPrice, secondPrice)
+                Calculate.TotalPriceIsCorrect(actor, firstPrice, secondPrice)
         );
     }
     @When("{actor} clicks on last View Product")

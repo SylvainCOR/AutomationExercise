@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 
-public class VerifyThat {
+public class Calculate {
 
     @SuppressWarnings("unchecked")
     public static Performable TotalPriceIsCorrect(Actor actor, int firstPrice, int secondPrice) {
